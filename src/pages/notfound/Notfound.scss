@@ -1,0 +1,21 @@
+.Notfound {
+    &__in {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    &__title {
+        font-size: 150px;
+        line-height: 180px;
+        margin-bottom: 0;
+    }
+
+    &__action {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}

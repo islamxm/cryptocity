@@ -1,0 +1,53 @@
+.HomeCon {
+    
+    &__head {
+        margin-bottom: 10px;
+    }
+
+    &__list {
+
+    }
+
+    &__item {
+        color: rgba(255, 255, 255, 0.5);
+        margin-bottom: 10px;
+        span {
+            font-weight: 600;
+            font-size: 25px;
+            line-height: 25px;
+            margin-left: 10px;
+        }
+
+        &:first-child {
+
+            span {
+                color: var(--aqua);
+                
+            }
+        }
+        &:last-child {
+            span {
+                color: #fff;
+            }
+        }
+    }
+
+    &__pr {
+
+        &_ind {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            &_val {
+                text-align: center;
+                color: #B665D8;
+                margin-bottom: 3px;
+            }
+
+            &_ln {
+
+            }
+        }
+    }
+}

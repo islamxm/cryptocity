@@ -1,0 +1,111 @@
+.Header {
+    position: absolute;top: 0;
+    left: 0;
+    width: 100%;
+    &__in {
+        padding: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &__logo {
+        width: 150px;
+        height: 45px;
+        
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: flex;
+        }
+    }
+
+    &__menu {
+        display: flex;
+        align-items: center;
+
+        &_nav {
+            display: flex;
+            align-items: center;
+
+            &_item.active {
+                color: var(--aqua);
+            }
+
+            &_item {
+                margin: 0 10px;
+                color: #fff;
+                font-weight: 500;
+                transition: all .2s ease;
+
+                &:hover {
+                    color: var(--aqua);
+                }
+            }
+        }
+
+        &_auth {
+            margin: 0 10px;
+
+
+            &_btn {
+                width: 130px;
+                height: 44px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: #000;
+                font-weight: 600;
+                background-image: url('../../assets/img/auth-btn-bg.svg');
+                background-repeat: no-repeat;
+                background-position: center;
+                background-size: contain;
+                background-color: unset;
+                border: none;
+                cursor: pointer;
+                transition: all .2s ease;
+                &:active {
+                    transform: scale(0.95);
+                }
+
+                &:hover {
+                    filter: drop-shadow(0px 0px 10px var(--aqua));
+                }
+
+                &_icon {
+                    margin-left: 5px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+            }
+        }
+
+        &_lang {
+            margin: 0 0 0 10px;
+            display: flex;  
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            text-transform: capitalize;
+
+            &_icon {
+                display: flex;  
+                align-items: center;
+                justify-content: center;
+                line-height: 100%;
+                color: #fff;
+                margin-left: 10px;
+                transition: all .2s ease;
+            }
+        }
+
+        &_lang.ant-dropdown-open {
+
+            .Header__menu_lang_icon {
+                transform: rotate(180deg);
+            }
+        }
+    }
+}

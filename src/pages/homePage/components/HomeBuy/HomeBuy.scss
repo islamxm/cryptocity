@@ -1,0 +1,24 @@
+.HomeBuy {
+    
+    &__head {
+        margin-bottom: 25px;
+    }
+
+    &__value {
+        text-align: center;
+        color: rgba(255, 255, 255, 0.5);
+
+        span {
+            color: var(--aqua);
+            font-size: 25px;
+            line-height: 30px;
+            font-weight: 600;
+        }
+    }
+
+    &__action {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}

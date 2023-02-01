@@ -1,0 +1,43 @@
+.HomeSale {
+    
+    &__head {
+        color: var(--light_yellow);
+        margin-bottom: 20px;
+    }
+
+    &__main {
+
+        &_item {
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            span {
+                font-size: 25px;
+                line-height: 25px;
+                color: #fff;
+                margin-left: 10px;
+                white-space: nowrap;
+            }
+
+            &:first-child {
+                color: #fff;
+                span {
+                    color: var(--light_yellow);
+                    font-weight: 600;
+                }
+            }
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    &__action {
+        display: flex;
+        align-items: flex-end;
+        justify-content: flex-end;
+        height: 100%;
+    }
+}

@@ -1,0 +1,52 @@
+.HomeNot {
+    
+    &__main {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        max-width: 500px;
+        margin: 0 auto;
+        width: 100%;
+
+        &_item {
+            position: relative;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            // margin: 0 15px;
+
+            &_val {
+                width: 95px;
+                height: 95px;
+                border-radius: 20px;
+                background-color: rgba(250, 218, 115, 0.2);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: var(--light_yellow);
+                text-align: center;
+                font-size: 25px;
+                line-height: 25px;
+                font-weight: 600;
+
+            }
+
+            &_name {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                transform: translateY(100%);
+                padding-top: 3px;
+                text-align: center;
+                color: rgba(255, 255, 255, 0.5);
+            }
+        }
+    }
+
+    &__action {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}

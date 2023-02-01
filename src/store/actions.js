@@ -1,0 +1,1 @@
+export const langAction = (lang) => ({type: 'LANG', lang})

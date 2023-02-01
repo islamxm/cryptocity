@@ -1,0 +1,18 @@
+.HeaderLangDrop {
+    background-color: var(--light_bg);
+    border-radius:15px;
+    padding: 5px;
+    min-width: 100px;
+
+    &__item {
+        padding: 10px;
+        border-radius: 10px;
+        font-weight: 600;
+        color: #fff;
+        cursor: pointer;
+    }
+
+    &__item.active {
+        background-color: var(--bg);
+    }
+}
