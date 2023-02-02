@@ -1,0 +1,90 @@
+.WalletTable {
+    max-width: 710px;
+    width: 100%;
+    &__table {
+        width: 100%;
+        border-collapse: collapse;
+
+        th {
+            text-align: left;
+            font-weight: 400;
+            padding: 10px;
+            color: rgba(255, 255, 255, 0.5);
+            width: calc(100% / 3);
+            &:not(:first-child) {
+                text-align: center;
+            }
+        }
+
+        td {
+            padding: 15px 10px;
+            transition: all .2s ease;
+            width: calc(100% / 3);
+        }
+
+        tr.WalletTable__table_row {
+            td {
+                &:first-child {
+                    border-radius: 10px 0 0 10px;
+                }
+                &:last-child {
+                    border-radius: 0 10px 10px 0;
+                }
+            }
+
+            &:hover {
+                td {
+                    background-color: var(--bg);
+                }
+            }
+        }
+
+        &_row {
+
+        }
+
+        &_item {
+
+        }
+
+        &_type {
+            font-size: 24px;
+            line-height: 28px;
+        }
+
+        &_sum {
+            &_main {
+                font-weight: 600;
+                text-align: center;
+                span {
+                    color: rgba(255, 255, 255, 0.5);
+                }
+            }
+
+            &_tm {
+                text-align: center;
+                color: rgba(255, 255, 255, 0.5);
+                font-size: 12px;
+                line-height: 15px;
+                
+            }
+        }
+
+        &_status {
+            text-align: center;
+            font-size: 24px;
+            line-height: 28px;
+            font-weight: 600;
+        }
+
+        &_status-check {
+            color: rgba(255, 255, 255, 0.5);
+        }
+        &_status-done {
+            color: var(--aqua);
+        }
+        &_status-cancel {
+            color: var(--red);
+        }
+    }
+}

@@ -9,7 +9,7 @@ import {GoSettings} from 'react-icons/go';
 const menuList = [
     {label: 'Аккаунт', link: '/', icon: <TbUser/>},
     {label: 'Кошелек', link: '/wallet', icon: <HiOutlineFolder/>},
-    {label: 'Referrals', link: '/refs', icon: <TbUsers/>},
+    {label: 'Referrals', link: '/referals', icon: <TbUsers/>},
     {label: 'Activity', link: '/activity', icon: <TiFlashOutline/>},
     {label: 'NFT', link: '/nft', icon: <HiOutlineFire/>},
     {label: 'Настройки', link: '/settings', icon: <GoSettings/>},

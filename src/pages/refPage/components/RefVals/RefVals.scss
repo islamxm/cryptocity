@@ -1,0 +1,22 @@
+.RefVals {
+    padding: 20px 35px !important;
+    
+    &__main {
+        font-weight: 600;
+        &_name {
+            color: rgba(255, 255, 255, 0.5);
+            margin-right: 10px;
+        }
+
+        &_value {
+
+        }
+    }
+
+    &__item {
+        &_name {
+            color: rgba(255, 255, 255, 0.5);
+            margin-right: 10px;
+        }
+    }
+}

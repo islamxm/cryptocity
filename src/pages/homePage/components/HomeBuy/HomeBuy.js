@@ -17,7 +17,6 @@ const HomeBuy = () => {
                         <div className="HomeBuy__action">
                             <Button
                                 // disabled={true}
-                                load={true}
                                 text={'BUY NOW'}
                                 />
                         </div>
