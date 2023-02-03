@@ -1,4 +1,4 @@
-.AuthPage {
+.SignupPage {
 
     &__in {
         width: 100%;
@@ -13,6 +13,7 @@
         max-width: 400px;
         width: 100%;
         // margin: 0 auto;
+
         &_head {
             text-align: center;
             margin-bottom: 50px;
@@ -22,14 +23,15 @@
 
         &_form {
 
-
             &_link {
-                color: #fff;
                 text-align: center;
+                color: #fff;
+
                 a {
                     color: var(--aqua);
                 }
             }
+
             &_action {
                 display: flex;
                 align-items: center;

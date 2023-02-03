@@ -1,4 +1,4 @@
-import './AuthPage.scss';
+import './SignupPage.scss';
 import contentEnterAnimProps from '../../ex/contentEnterAnimProps';
 import PageLayout from '../../components/PageLayout/PageLayout';
 import {motion} from 'framer-motion';
@@ -7,58 +7,39 @@ import Button from '../../components/Button/Button';
 import { useSelector } from 'react-redux';
 import apiService from '../../service/apiService';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { Row, Col } from 'antd';
-
+import { Link } from 'react-router-dom';
 const service = new apiService();
 
-const authResTypes = {
-    error: 'WrongMailOrPass',
-    notfound: 'UserNotFound',
-}
 
 
-const AuthPage = () => {
-    const {token} = useSelector(state => state)
-    const [mail,setMail] = useState('')
+const SignupPage = () => {
+    const [mail, setMail] = useState('')
     const [pass, setPass] = useState('')
-    const [load, setLoad] = useState(false)
     const [error, setError] = useState('')
-
+    const [load, setLoad] = useState(false)
 
     const onSubmit = () => {
         setLoad(true)
         const body = {
-            mail,
+            email: mail,
             password: pass
         }
 
-        service.auth(body).then(res => {
-            switch(res) {
-                case authResTypes.error: 
-                    setError('Неверный e-mail или пароль');
-                    break;
-                case authResTypes.notfound:
-                    setError('Пользователь с такими данными не найден')
-                    break;
-                default:
-                    setError('')
-                    break;
-            }
+        service.registration(body).then(res => {
             console.log(res)
         }).finally(_ => {
             setLoad(false)
         })
     }
 
-
     return (
-        <div className="page AuthPage">
+        <div className="page SignupPage">
             <PageLayout>
-                <motion.div className='AuthPage__in' {...contentEnterAnimProps}>
-                    <div className="AuthPage__body">
-                        <div className="AuthPage__body_head">Войти</div>
-                        <div className="AuthPage__body_form">
+                <motion.div className='SignupPage__in' {...contentEnterAnimProps}>
+                    <div className="SignupPage__body">
+                    <div className="SignupPage__body_head">Регистрация</div>
+                        <div className="SignupPage__body_form">
                             <Row gutter={[20,20]}>
                                 <Col span={24}>
                                     <Input
@@ -78,12 +59,12 @@ const AuthPage = () => {
                                         />
                                 </Col>
                                 <Col span={24}>
-                                    <div className="AuthPage__body_form_link">
-                                        Нет аккаунта? <Link to={'/signup'}>Регистрация</Link> 
+                                    <div className="SignupPage__body_form_link">
+                                        Есть аккаунт? <Link to={'/auth'}>Войти</Link>
                                     </div>
                                 </Col>
                                 <Col span={24}>
-                                    <div className="AuthPage__body_form_action">
+                                    <div className="SignupPage__body_form_action">
                                     <Button
                                         disabled={!mail || !pass}
                                         text={'Войти'}
@@ -102,4 +83,5 @@ const AuthPage = () => {
     )
 }
 
-export default AuthPage;
+
+export default SignupPage;

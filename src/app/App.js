@@ -12,6 +12,8 @@ import WalletPage from '../pages/walletPage/WalletPage';
 import CheckAuth from '../hoc/CheckAuth';
 import AuthPage from '../pages/authPage/AuthPage';
 import { useLocation } from 'react-router-dom';
+import SignupPage from '../pages/signupPage/SignupPage';
+
 const App = () => {
     const loc = useLocation();
 
@@ -19,7 +21,7 @@ const App = () => {
         <div className="App">
             <Layout>
                 {
-                    loc?.pathname !== '/auth' ? (
+                    loc?.pathname !== '/auth' && loc?.pathname !== '/signup' ? (
                         <>
                             <Header/>
                             <Menu/>
@@ -29,10 +31,11 @@ const App = () => {
                 
                 
                 <Routes>
-                    <Route path='/auth' element={<AuthPage/>}/>
-                    <Route path='/' element={<HomePage/>}/>
-                    <Route path='/referals' element={<RefPage/>}/>
-                    <Route path='/wallet' element={<WalletPage/>}/>
+                    <Route path='/auth' element={<CheckAuth><AuthPage/></CheckAuth>}/>
+                    <Route path='/' element={<CheckAuth><HomePage/></CheckAuth>}/>
+                    <Route path='/referals' element={<CheckAuth><RefPage/></CheckAuth>}/>
+                    <Route path='/wallet' element={<CheckAuth><WalletPage/></CheckAuth>}/>
+                    <Route path='/signup' element={<SignupPage/>}></Route>
                     <Route path='*' element={<Notfound/>}/>
                 </Routes>
             </Layout>

@@ -1,5 +1,10 @@
+import Cookies from "js-cookie";
+
+
+
 const initState = {
-    lang: 'en'
+    lang: 'en',
+    token: Cookies.get('cryptocity-lk-token') ? Cookies.get('cryptocity-lk-token') : null 
 }
 
 const reducer = (state = initState, action) => {
@@ -9,6 +14,11 @@ const reducer = (state = initState, action) => {
             return {
                 ...state,
                 lang: action.lang
+            }
+        case 'TOKEN':
+            return {
+                ...state,
+                token: action.token
             }
         default:
             return state;

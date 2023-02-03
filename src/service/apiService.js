@@ -13,7 +13,8 @@ class apiService {
             let res = await fetch(endpoints.registration, {
                 method: 'POST',
                 body: JSON.stringify(body),
-                headers
+                headers,
+                // mode: 'no-cors'
             })
             return await res.json()
         } catch(err) {
