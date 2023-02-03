@@ -16,7 +16,8 @@ const authResTypes = {
     error: 'WrongMailOrPass',
     notfound: 'UserNotFound',
     userexist: 'UserExist',
-    mailerror: 'EmailError'
+    mailerror: 'EmailError',
+    sendmail: 'LinkSendToMail',
 }
 
 
@@ -47,6 +48,9 @@ const SignupPage = () => {
                     break;
                 case authResTypes.mailerror:
                     setError('Произошла ошибка. Сообщение не отправлено')
+                    break;
+                case authResTypes.sendmail:
+                    setError('')
                     break;
                 default:
                     setError('')
