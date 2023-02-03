@@ -9,17 +9,25 @@ import apiService from '../../service/apiService';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Row, Col } from 'antd';
+import Cookies from 'js-cookie';
+import { useDispatch } from 'react-redux';
+import {tokenUpdate} from '../../store/actions';
+import { useNavigate } from 'react-router-dom';
 
 const service = new apiService();
+
 
 const authResTypes = {
     error: 'WrongMailOrPass',
     notfound: 'UserNotFound',
+    userexist: 'UserExist'
 }
 
 
 const AuthPage = () => {
-    const {token} = useSelector(state => state)
+    const disaptch = useDispatch()
+    const nav = useNavigate();
+    //const {token} = useSelector(state => state)
     const [mail,setMail] = useState('')
     const [pass, setPass] = useState('')
     const [load, setLoad] = useState(false)
@@ -41,8 +49,14 @@ const AuthPage = () => {
                 case authResTypes.notfound:
                     setError('Пользователь с такими данными не найден')
                     break;
+                case authResTypes.userexist:
+                    setError('Пользователь с таким e-mail уже существует')
+                    break;
                 default:
                     setError('')
+                    Cookies.set('cryptocity-lk-token', res)
+                    disaptch(tokenUpdate(res))
+                    nav('/', {replace: true})
                     break;
             }
             console.log(res)

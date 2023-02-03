@@ -12,6 +12,13 @@ import { Link } from 'react-router-dom';
 const service = new apiService();
 
 
+const authResTypes = {
+    error: 'WrongMailOrPass',
+    notfound: 'UserNotFound',
+    userexist: 'UserExist',
+    mailerror: 'EmailError'
+}
+
 
 const SignupPage = () => {
     const [mail, setMail] = useState('')
@@ -22,12 +29,29 @@ const SignupPage = () => {
     const onSubmit = () => {
         setLoad(true)
         const body = {
-            email: mail,
+            mail: mail,
             password: pass
         }
 
         service.registration(body).then(res => {
             console.log(res)
+            switch(res) {
+                case authResTypes.error: 
+                    setError('Неверный e-mail или пароль');
+                    break;
+                case authResTypes.notfound:
+                    setError('Пользователь с такими данными не найден')
+                    break;
+                case authResTypes.userexist:
+                    setError('Пользователь с таким e-mail уже существует')
+                    break;
+                case authResTypes.mailerror:
+                    setError('Произошла ошибка. Сообщение не отправлено')
+                    break;
+                default:
+                    setError('')
+                    break;
+            }
         }).finally(_ => {
             setLoad(false)
         })

@@ -16,7 +16,7 @@ class apiService {
                 headers,
                 // mode: 'no-cors'
             })
-            return await res.json()
+            return await res.text()
         } catch(err) {
             console.log(err)
         }
