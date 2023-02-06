@@ -34,7 +34,7 @@ const HomePage = () => {
     const closeAllUnlock = () => setAllUnlockModal(false)
 
     const getData = () => {
-        
+
         if(token) {
             service.getUserBalance(token).then(res => {
                 setUnlocksList(res.UnlocksList);
@@ -46,7 +46,11 @@ const HomePage = () => {
 
 
     useEffect(() => {
-        const getDataInterval = setInterval(getData, 20000)
+        getData()
+        const getDataInterval = setInterval(() => {
+            console.log('get dta')
+            getData()
+        }, 20000)
 
         return () => clearInterval(getDataInterval);
     }, [token])
