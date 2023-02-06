@@ -1,0 +1,65 @@
+.AllUnlockModal {
+
+    &__in {
+        padding: 0 20px;
+    }
+
+    &__head {
+        padding-bottom: 12px;
+        border-bottom: 1px solid  rgba(255, 255, 255, 0.1);
+
+        &_title {
+            margin-bottom: 12px;
+
+        }
+
+        &_ex {  
+            text-align: center;
+            color: rgba(255, 255, 255, 0.5);font-weight: 400;
+            font-size: 18px;
+            line-height: 175%;
+        }
+    }
+
+    &__body {
+        padding: 25px 0;
+
+        &_top {
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            &_item {
+                width: 49%;
+                color: rgba(255, 255, 255, 0.5);
+                font-weight: 400;
+                font-size: 18px;
+                line-height: 135%;
+
+                &:last-child {
+                    text-align: right;
+                }
+            }
+        }
+
+        &_item {
+            padding: 4px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            &_value {
+                width: 49%;
+                font-weight: 400;
+                font-size: 27px;
+                line-height: 145%;
+                color: #FFFFFF;
+
+                &:last-child {
+                    text-align: right;
+                }
+            }
+        }
+    }
+}

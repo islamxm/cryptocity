@@ -1,8 +1,10 @@
 import './HomeCon.scss';
 import { Row, Col } from 'antd';
 import Button from '../../../../components/Button/Button';
-
+import { useSelector } from 'react-redux';
 const HomeCon = () => {
+    const {userInfo} = useSelector(state => state);
+
     return (
         <div className="HomeCon panel">
             <div className="HomeCon__head panel__head">Вывод MPI</div>
@@ -11,10 +13,10 @@ const HomeCon = () => {
                     <Col span={16}>
                         <div className="HomeCon__list">
                             <div className="HomeCon__item">
-                            Минимальная сумма для вывода <span>2,411 MPI</span>
+                            Минимальная сумма для вывода <span>{userInfo?.OutputMinSum} MPI</span>
                             </div>
                             <div className="HomeCon__item">
-                            MPI на счету для вывода <span>1,000/2,500 MPI</span>
+                            MPI на счету для вывода <span>{userInfo?.MPIforOutput} MPI</span>
                             </div>
                         </div>
                     </Col>

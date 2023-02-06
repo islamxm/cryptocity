@@ -1,5 +1,13 @@
 .HomeDl {
-    
+    .hide-def-countdown {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        visibility: hidden;
+        pointer-events: none;
+        touch-action: none;
+    }
     &__head {
         margin-bottom: 20px;
     }
@@ -40,6 +48,8 @@
                 transform: translateY(100%);
                 padding-top: 5px;
                 color: rgba(255, 255, 255, 0.5);
+                font-size: 18px;
+                line-height: 22px;
             }
         }
     }

@@ -22,19 +22,6 @@ class apiService {
         }
     }
 
-    // registrationConfirm = async () => {
-    //     try {
-    //         let res = await fetch(endpoints.registrationConfirm, {
-    //             method: 'POST',
-    //             headers
-    //         })
-
-    //         return await res.json()
-    //     } catch(err) {
-    //         console.log(err)
-    //     }
-    // }
-
     auth = async (body) => {
         try {
             let res = await fetch(endpoints.auth, {
@@ -57,6 +44,25 @@ class apiService {
                 headers
             }) 
             return await res.json()
+        } catch(err) {
+            console.log(err)
+        }
+    } 
+
+
+    getUserBalance = async (token) => {
+        try {
+            let res = await fetch(`${endpoints.getUserBalance}`, {
+                method: 'POST',
+                // headers: {
+                //     ...headers,
+                // },
+                body: JSON.stringify({
+                    UserToken: token
+                })
+            })
+
+            return await res.json();
         } catch(err) {
             console.log(err)
         }

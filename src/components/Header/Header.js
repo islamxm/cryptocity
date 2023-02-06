@@ -11,15 +11,26 @@ import { langAction } from '../../store/actions';
 import HeaderLangDrop from './components/HeaderLangDrop/HeaderLangDrop';
 import { useEffect } from 'react';
 import {FiChevronDown} from 'react-icons/fi';
+import {tokenUpdate} from '../../store/actions';
+import { useNavigate } from 'react-router-dom';
+
+import Cookies from 'js-cookie';
 
 const Header = () => {
     const {lang} = useSelector(state => state);
     const dispatch = useDispatch();
+    const nav = useNavigate();
+
 
     const selectLang = (val) => {
         dispatch(langAction(val))
-     
     } 
+
+
+    const handleLogout = () => {
+        Cookies.remove('cryptocity-lk-token');
+        nav('/auth', {replace: true})
+    }
 
     return (
         <header className="Header">
@@ -35,7 +46,7 @@ const Header = () => {
                             <Link className="Header__menu_nav_item" to={'/'}>Вывод крипты</Link>
                         </div>
                         <div className="Header__menu_auth">
-                            <button className="Header__menu_auth_btn">
+                            <button onClick={handleLogout} className="Header__menu_auth_btn">
                                 <div className="Header__menu_auth_btn_text">Выйти</div>
                                 <div className="Header__menu_auth_btn_icon">
                                     <FiArrowDownRight/>

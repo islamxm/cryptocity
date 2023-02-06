@@ -8,7 +8,7 @@ const endpoints = {
     registrationConfirm: `${PATH}RegistrationConfirm.php`,
     auth: `${PATH}Authorization.php`,
     resetPassword: `${PATH}ResetPassword.php`,
-    
+    getUserBalance: `${PATH}GetUserBalance.php`
 }
 
 export default endpoints;

@@ -12,9 +12,53 @@ import HomeBalance from './components/HomeBalance/HomeBalance';
 import ContentLayout from '../../components/ContentLayout/ContentLayout';
 import {motion} from 'framer-motion';
 import contentEnterAnimProps from '../../ex/contentEnterAnimProps';
+import apiService from '../../service/apiService';
+import { useSelector, useDispatch } from 'react-redux';
+import { useEffect, useState } from 'react';
+import AllUnlockModal from './modals/AllUnlockModal/AllUnlockModal';
+import { userInfoUpdate } from '../../store/actions';
+const service = new apiService();
+
 const HomePage = () => {
+    const dispatch = useDispatch();
+    const {token} = useSelector(state => state);
+    const [allUnlockModal, setAllUnlockModal] = useState(false)
+
+    const [UnlocskList, setUnlocksList] = useState([])
+
+
+
+
+
+    const openAllUnlock = () => setAllUnlockModal(true)
+    const closeAllUnlock = () => setAllUnlockModal(false)
+
+    const getData = () => {
+        
+        if(token) {
+            service.getUserBalance(token).then(res => {
+                setUnlocksList(res.UnlocksList);
+                dispatch(userInfoUpdate(res.UserInfo))
+            })
+        }
+    }
+
+
+
+    useEffect(() => {
+        const getDataInterval = setInterval(getData, 20000)
+
+        return () => clearInterval(getDataInterval);
+    }, [token])
+
+
     return (
         <div className="page HomePage">
+            <AllUnlockModal
+                visible={allUnlockModal}
+                close={closeAllUnlock}
+                data={UnlocskList}
+                />
             <PageLayout>
                 <div className="sb"></div>
                 <ContentLayout>
@@ -32,7 +76,7 @@ const HomePage = () => {
                             <HomeCon/>
                         </div>
                         <div className="HomePage__item">
-                            <HomeUl/>
+                            <HomeUl list={UnlocskList} openAllUnlock={openAllUnlock}/>
                         </div>
                         <div className="HomePage__item">
                             <HomeSale/>

@@ -3,6 +3,8 @@ import { Row, Col } from 'antd';
 // import { ResponsivePie } from '@nivo/pie';
 import ReactApexChart from 'react-apexcharts';
 import * as _ from 'lodash';
+import { useSelector } from 'react-redux';
+import { useEffect, useId } from 'react';
 
 const chartMock = [
     {
@@ -37,12 +39,18 @@ const chartMock = [
     }
   ]
 
-const labels = ['a','b','c','d','e'];
-const series = [10,10,10,10,60];
+const labels = ['MPI локи','MPI депозит','MPI на балансе'];
 const colors = ['#FF6A6A', '#57B256', '#6AB6FC', '#615BA5', '#5E595F'];
 
 
 const HomeBalance = () => {
+    const {userInfo} = useSelector(state => state)
+
+    useEffect(() => {
+        console.log(userInfo)
+    }, [userInfo])
+
+
     return (
         <div className="HomeBalance panel">
             <div className="HomeBalance__head panel__head">balance</div>
@@ -60,7 +68,7 @@ const HomeBalance = () => {
                                         height={140}
                                         
                                         type={'donut'}
-                                        series={series}
+                                        series={[userInfo?.MPILocks, userInfo?.MPIDeposit, userInfo?.MPIBalance]}
                                         labels={labels}
                                         options={{
                                             labels: labels,
@@ -76,12 +84,12 @@ const HomeBalance = () => {
                                                 position: 'bottom',
                                                 horizontalAlign: 'left'
                                             },
-                                            colors: colors,
+                                            colors: ['#36C2F3', '#677AE5', '#F5C105'],
                                             dataLabels: {
                                                 enabled: false
                                             },
                                             series: {
-                                                data: series
+                                                data: [userInfo?.MPILocks, userInfo?.MPIDeposit, userInfo?.MPIBalance]
                                             },
                                             plotOptions: {
                                                 pie: {
@@ -92,7 +100,7 @@ const HomeBalance = () => {
                                                                 formatter: (e, i, c) => {
                                                                     return e;
                                                                 },
-                                                                fontSize: 15,
+                                                                fontSize: 12,
                                                                 fontWeight: 500,
                                                                 color: 'rgba(255, 255, 255, 0.5)',
                                                                 // show: false
@@ -126,7 +134,7 @@ const HomeBalance = () => {
                             </Col>
                             <Col span={12}>
                                 <div className="HomeBalance__val">
-                                2,411 MPI
+                                {userInfo?.MPIBalance + userInfo?.MPILocks + userInfo?.MPIDeposit} MPI
                                 </div>
                             </Col>
                         </Row>
@@ -135,15 +143,15 @@ const HomeBalance = () => {
                         <div className="HomeBalance__list">
                             <div className="HomeBalance__item">
                                 <div className="HomeBalance__item_name">MPI локи</div>
-                                <div className="HomeBalance__item_value">9</div>
+                                <div className="HomeBalance__item_value">{userInfo?.MPILocks}</div>
                             </div>
                             <div className="HomeBalance__item">
                                 <div className="HomeBalance__item_name">MPI депозит</div>
-                                <div className="HomeBalance__item_value">18</div>
+                                <div className="HomeBalance__item_value">{userInfo?.MPIDeposit}</div>
                             </div>
                             <div className="HomeBalance__item">
                                 <div className="HomeBalance__item_name">MPI на балансе</div>
-                                <div className="HomeBalance__item_value">0</div>
+                                <div className="HomeBalance__item_value">{userInfo?.MPIBalance}</div>
                             </div>
                         </div>
                     </Col>
