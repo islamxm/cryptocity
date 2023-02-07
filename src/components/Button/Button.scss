@@ -65,7 +65,18 @@
         
     }
 }
+.Button.danger {
+    border-color: red;
+    color: red;
+    
+    &:after {
+        background-color: red;
+    }
 
+    &:hover {
+        color: #fff;
+    }
+}
 .Button.load {
     pointer-events: none;
     touch-action: none;

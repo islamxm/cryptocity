@@ -6,10 +6,11 @@ const Button = ({
     load,
     disabled,
     style,
-    onClick
+    onClick,
+    variant = ''
 }) => {
     return (
-        <button className={"Button" + (load ? ' load ' : '') + (disabled ? ' disabled ' : '')} disabled={disabled} onClick={onClick}>
+        <button className={"Button" + (load ? ' load ' : '') + (disabled ? ' disabled ' : '') + (variant ? ' danger ' : '')} disabled={disabled} onClick={onClick}>
             {
                 load ? (
                     <div className="Button__load">

@@ -59,8 +59,8 @@ const HomeBalance = () => {
                     <Col span={24}>
                         <Row gutter={[30,30]}>
                             <Col 
-                                //span={24}
-                                span={12}
+                                md={12}
+                                span={24}
                                 >
                                 <div className="HomeBalance__dg">
                                     <ReactApexChart
@@ -132,7 +132,7 @@ const HomeBalance = () => {
                                         />
                                 </div>
                             </Col>
-                            <Col span={12}>
+                            <Col span={24} md={12}>
                                 <div className="HomeBalance__val">
                                 {userInfo?.MPIBalance + userInfo?.MPILocks + userInfo?.MPIDeposit} MPI
                                 </div>

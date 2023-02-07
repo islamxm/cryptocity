@@ -10,6 +10,10 @@ a {
     color: inherit;
 }
 
+li {
+    list-style: none;
+}
+
 
 body {
     font-family: 'Inter', sans-serif;
@@ -27,6 +31,10 @@ body {
     flex: 0 0 auto;
     margin-right: 40px;
     // border: 1px solid red;
+}
+
+@media (max-width: 1200px) {
+    .sb {display: none;}
 }
 
 .panel {

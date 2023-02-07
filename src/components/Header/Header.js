@@ -9,17 +9,27 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { langAction } from '../../store/actions';
 import HeaderLangDrop from './components/HeaderLangDrop/HeaderLangDrop';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import {FiChevronDown} from 'react-icons/fi';
 import {tokenUpdate} from '../../store/actions';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { mobMenuToggle } from '../../store/actions';
+import LogoutConfirmModal from '../../modals/LogoutConfirmModal/LogoutConfirmModal';
 
 import Cookies from 'js-cookie';
 
 const Header = () => {
-    const {lang} = useSelector(state => state);
+    const {lang, mobMenu} = useSelector(state => state);
     const dispatch = useDispatch();
     const nav = useNavigate();
+    const loc = useLocation();
+    const [logoutModal, setLogoutModal] = useState(false)
+    const openLogoutModal = () => setLogoutModal(true)
+    const closeLogoutModal = () => setLogoutModal(false)
+
+    useEffect(() => {
+        dispatch(mobMenuToggle(false))
+    }, [loc])
 
 
     const selectLang = (val) => {
@@ -28,12 +38,19 @@ const Header = () => {
 
 
     const handleLogout = () => {
+        dispatch(tokenUpdate(null))
         Cookies.remove('cryptocity-lk-token');
         nav('/auth', {replace: true})
+        window.location.reload();
+    }
+
+    const toggleMobMenu = () => {
+        dispatch(mobMenuToggle(!mobMenu))
     }
 
     return (
         <header className="Header">
+            <LogoutConfirmModal visible={logoutModal} logout={handleLogout} close={closeLogoutModal}/>
             <Container>
                 <div className="Header__in">
                     <a href="#" className="Header__logo">
@@ -46,7 +63,7 @@ const Header = () => {
                             <Link className="Header__menu_nav_item" to={'/'}>Вывод крипты</Link>
                         </div>
                         <div className="Header__menu_auth">
-                            <button onClick={handleLogout} className="Header__menu_auth_btn">
+                            <button onClick={openLogoutModal} className="Header__menu_auth_btn">
                                 <div className="Header__menu_auth_btn_text">Выйти</div>
                                 <div className="Header__menu_auth_btn_icon">
                                     <FiArrowDownRight/>
@@ -65,6 +82,13 @@ const Header = () => {
                                 
                             </div>
                         </Dropdown>
+                        <div className="Header__menu_burger">
+                            <button onClick={toggleMobMenu} className={"Header__menu_burger_btn" + (mobMenu ? ' active ' : '')}>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </Container>

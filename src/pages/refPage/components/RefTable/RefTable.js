@@ -12,22 +12,22 @@ const RefTable = () => {
                     <th>Всего</th>
                 </tr>
                 <tr className='RefTable__table_row'>
-                    <td>protaps</td>
-                    <td>23</td>
-                    <td>0,0155MPI</td>
-                    <td>0,0155MPI</td>
+                    <td><span>Имя</span>protaps</td>
+                    <td><span>Уровень</span>23</td>
+                    <td><span>Заработок</span>0,0155MPI</td>
+                    <td><span>Всего</span>0,0155MPI</td>
                 </tr>
                 <tr className='RefTable__table_row'>
-                    <td>protaps</td>
-                    <td>23</td>
-                    <td>0,0155MPI</td>
-                    <td>0,0155MPI</td>
+                    <td><span>Имя</span>protaps</td>
+                    <td><span>Уровень</span>23</td>
+                    <td><span>Заработок</span>0,0155MPI</td>
+                    <td><span>Всего</span>0,0155MPI</td>
                 </tr>
                 <tr className='RefTable__table_row'> 
-                    <td>protaps</td>
-                    <td>23</td>
-                    <td>0,0155MPI</td>
-                    <td>0,0155MPI</td>
+                    <td><span>Имя</span>protaps</td>
+                    <td><span>Уровень</span>23</td>
+                    <td><span>Заработок</span>0,0155MPI</td>
+                    <td><span>Всего</span>0,0155MPI</td>
                 </tr>
             </table>
         </div>

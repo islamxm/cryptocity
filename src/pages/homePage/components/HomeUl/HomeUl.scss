@@ -67,3 +67,9 @@
         justify-content: center;
     }
 }
+
+@media (max-width: 767px) {
+    .HomeUl {
+        padding: 10px !important;
+    }
+}

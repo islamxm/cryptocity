@@ -19,15 +19,33 @@ import AllUnlockModal from './modals/AllUnlockModal/AllUnlockModal';
 import { userInfoUpdate } from '../../store/actions';
 const service = new apiService();
 
+
+const container = {
+    hidden: { opacity: 1, scale: 0 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        delayChildren: 0.1,
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const item = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1
+    }
+  };
+
+
 const HomePage = () => {
     const dispatch = useDispatch();
     const {token} = useSelector(state => state);
     const [allUnlockModal, setAllUnlockModal] = useState(false)
-
     const [UnlocskList, setUnlocksList] = useState([])
-
-
-
 
 
     const openAllUnlock = () => setAllUnlockModal(true)
@@ -48,7 +66,6 @@ const HomePage = () => {
     useEffect(() => {
         getData()
         const getDataInterval = setInterval(() => {
-            console.log('get dta')
             getData()
         }, 20000)
 
@@ -66,29 +83,33 @@ const HomePage = () => {
             <PageLayout>
                 <div className="sb"></div>
                 <ContentLayout>
-                    <motion.div {...contentEnterAnimProps} className="HomePage__in">
-                        <div className="HomePage__item">
+                    <motion.ul
+                        variants={container}
+                        initial="hidden"
+                        animate="visible"
+                        className="HomePage__in">
+                        <motion.li variants={item} className="HomePage__item">
                             <HomeBalance/>
-                        </div>
-                        <div className="HomePage__item">
+                        </motion.li>
+                        <motion.li variants={item} className="HomePage__item">
                             <HomeBuy/>
-                        </div>
-                        <div className="HomePage__item">
+                        </motion.li>
+                        <motion.li variants={item} className="HomePage__item">
                             <HomeDl/>
-                        </div>
-                        <div className="HomePage__item">
+                        </motion.li>
+                        <motion.li variants={item} className="HomePage__item">
                             <HomeCon/>
-                        </div>
-                        <div className="HomePage__item">
+                        </motion.li>
+                        <motion.li variants={item} className="HomePage__item">
                             <HomeUl list={UnlocskList} openAllUnlock={openAllUnlock}/>
-                        </div>
-                        <div className="HomePage__item">
+                        </motion.li>
+                        <motion.li variants={item} className="HomePage__item">
                             <HomeSale/>
-                        </div>
-                        <div className="HomePage__item">
+                        </motion.li>
+                        {/* <div className="HomePage__item">
                             <HomeNot/>
-                        </div>
-                    </motion.div>
+                        </div> */}
+                    </motion.ul>
                 </ContentLayout>
                 
             </PageLayout>

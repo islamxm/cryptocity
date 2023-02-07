@@ -88,3 +88,61 @@
         }
     }
 }
+
+@media (max-width: 768px) {
+    .WalletTable {
+
+        &__table {
+
+            tr {
+                display: flex;
+                flex-wrap: wrap;
+                &:last-child {
+                    td {
+
+                        &:last-child {
+                            margin-bottom: 0;
+                        }
+                    }
+                }
+                th {
+                    display: none;
+                }
+
+                td {
+                    text-align: left !important;
+                    background-color: var(--bg);
+
+                    &:first-child {
+                        border-radius: 10px 10px 0 0 !important; 
+                    }
+                    &:last-child {
+                        border-radius: 0 0 10px 10px !important; 
+                        margin-bottom: 10px;
+                    }
+                    
+                }
+
+                &:hover {
+                    td {
+                        
+                    }
+                }
+            }
+            
+
+            &_item {
+                width: 100% !important;
+            }
+            &_sum {
+                &_main {
+                    text-align: left;
+                }
+                &_tm {
+                    text-align: left;
+                }
+            }
+            
+        }
+    }
+}

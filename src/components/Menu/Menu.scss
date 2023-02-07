@@ -35,7 +35,73 @@
         }
     }
 
+    &__action {
+        display: none;
+    }
+
     &__item.active {
         background-color: var(--purp);
+    }
+}
+
+@media (max-width: 1200px) {
+    .Menu {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        transform: translateX(-100%);
+        transition: all .3s ease;
+        z-index: 99;
+        background-color: var(--bg);
+    }
+
+    .Menu.active {
+        transform: translateX(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .Menu {
+        width: 100%;
+
+        &__in {
+            padding: 15px;
+        }
+
+        
+
+        &__action {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            &_btn {
+                width: 130px;
+                height: 44px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background-image: url('../../assets/img/auth-btn-bg.svg');
+                background-repeat: no-repeat;
+                background-position: center;
+                background-size: contain;
+                background-color: unset;
+                border: none;
+                color: var(--bg);
+                transition: all .3s ease;
+                cursor: pointer;
+                font-weight: 600;
+
+                &:active {
+                    transform: scale(0.95);
+                }
+
+                &:hover {
+                    filter: drop-shadow(0px 0px 10px var(--aqua));
+                }
+
+            }
+        }
     }
 }

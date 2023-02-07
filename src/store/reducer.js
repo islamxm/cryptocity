@@ -5,7 +5,8 @@ import Cookies from "js-cookie";
 const initState = {
     lang: 'en',
     token: Cookies.get('cryptocity-lk-token') ? Cookies.get('cryptocity-lk-token') : null ,
-    userInfo: null
+    userInfo: null,
+    mobMenu: false
 }
 
 const reducer = (state = initState, action) => {
@@ -25,6 +26,11 @@ const reducer = (state = initState, action) => {
             return {
                 ...state,
                 userInfo: action.userInfo
+            }
+        case 'MOB_MENU':
+            return {
+                ...state,
+                mobMenu: !state.mobMenu
             }
         default:
             return state;

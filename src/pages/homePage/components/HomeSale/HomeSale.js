@@ -13,7 +13,7 @@ const HomeSale = () => {
             <div className="HomeSale__head panel__head">PUBLIC SALE</div>
             <Col span={24}>
                 <Row gutter={[15,15]}>
-                    <Col span={14}>
+                    <Col md={14} span={24}>
                         <div className="HomeSale__main">
                             <div className="HomeSale__main_item">
                             Цена токена <span>{userInfo?.PublicSaleTokenPrice} USDT</span>
@@ -26,7 +26,7 @@ const HomeSale = () => {
                             </div>
                         </div>
                     </Col>
-                    <Col span={10}>
+                    <Col span={24} md={10}>
                         <div className="HomeSale__action">
                             <Button
                                 text={'BUY NOW'}

@@ -18,6 +18,10 @@
                 padding: 15px 10px;
                 transition: all .2s ease;
 
+                span {
+                    display: none;
+                }
+
             }
         }
 
@@ -37,6 +41,55 @@
             &:hover {
                 td {
                     background-color: var(--bg);
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .RefTable {
+        &__table {
+
+            tr {
+                display: flex;
+                flex-wrap: wrap;
+
+                &:last-child {
+                    td {
+                        &:last-child {
+                            margin-bottom: 0;
+                        }
+                    }
+                }
+                th {
+                    display: none;
+                }
+
+                td {
+                    width: 100%;
+                    background-color: var(--bg);
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    font-size: 16px;
+                    line-height: 20px;
+                    span {
+                        width: 50%;
+                        color: #fff;
+                        opacity: .6;
+                        font-size: 14px;
+                        line-height: 17px;
+                        display: block;
+                    }
+
+                    &:first-child {
+                        border-radius: 10px 10px 0 0 !important;
+                    }
+                    &:last-child {
+                        border-radius: 0 0 10px 10px !important;
+                        margin-bottom: 10px;
+                    }
                 }
             }
         }

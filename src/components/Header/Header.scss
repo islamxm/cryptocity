@@ -64,7 +64,9 @@
                 background-color: unset;
                 border: none;
                 cursor: pointer;
+
                 transition: all .2s ease;
+
                 &:active {
                     transform: scale(0.95);
                 }
@@ -105,6 +107,110 @@
 
             .Header__menu_lang_icon {
                 transform: rotate(180deg);
+            }
+        }
+
+        &_burger {
+            display: none;
+        }
+    }
+}
+
+@media (max-width: 1200px) {
+    .Header {
+
+        &__menu {
+
+            &_burger {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex: 0 0 auto;
+                margin-left: 20px;
+
+                &_btn.active {
+                    span {
+                        &:nth-child(1) {
+                            top: calc(50% - 2px);
+                            transform: rotate(45deg);
+                        }
+                        &:nth-child(2) {
+                            opacity: 0;
+                        }
+                        &:nth-child(3) {
+                            bottom: calc(50% - 2px);
+                            transform: rotate(-45deg);
+                        }
+                    }
+                }
+
+                &_btn {
+                    width: 50px;
+                    height: 30px;
+                    background-color: unset;
+                    border: none;
+                    position: relative;
+
+                    span {
+                        height: 4px;
+                        border-radius: 5px;
+                        background-color: #fff;
+                        display: block;
+                        position: absolute;
+                        width: 100%;
+                        transition: all .3s ease;
+
+                        &:nth-child(1) {
+                            top: 0;
+                            left: 0;
+                        }
+                        &:nth-child(2) {
+                            top: calc(50% - 2px);
+                            left: 0;
+                        }
+                        &:nth-child(3) {
+                            bottom: 0;
+                            left: 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 1200px) {
+    .Header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 100;
+        background-color: var(--bg);
+    }
+}
+
+@media (max-width: 1024px) {
+    .Header {
+
+        &__menu {
+
+            &_nav {
+                display: none;
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .Header {
+
+        &__menu {
+
+            &_auth {
+                &_btn {
+                    display: none;
+                }
             }
         }
     }
