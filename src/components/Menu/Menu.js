@@ -11,7 +11,9 @@ import { tokenUpdate } from '../../store/actions';
 import { useDispatch } from 'react-redux';
 import Cookies from 'js-cookie';
 import LogoutConfirmModal from '../../modals/LogoutConfirmModal/LogoutConfirmModal';
+import apiService from '../../service/apiService';
 
+const service = new apiService();
 const menuList = [
     {label: 'Аккаунт', link: '/', icon: <TbUser/>},
     {label: 'Кошелек', link: '/wallet', icon: <HiOutlineFolder/>},
@@ -25,17 +27,23 @@ const menuList = [
 
 const Menu = () => {
     const dispatch = useDispatch();
-    const {mobMenu} = useSelector(state => state);
+    const {mobMenu, token} = useSelector(state => state);
     const nav = useNavigate();
     const [logoutModal, setLogoutModal] = useState(false)
     const openLogoutModal = () => setLogoutModal(true)
     const closeLogoutModal = () => setLogoutModal(false)
 
     const handleLogout = () => {
-        dispatch(tokenUpdate(null))
-        Cookies.remove('cryptocity-lk-token');
-        nav('/auth', {replace: true})
-        window.location.reload();
+        service.logout(token).then(res => {
+            if(res == 'Ok') {
+                dispatch(tokenUpdate(null))
+                Cookies.remove('cryptocity-lk-token');
+                nav('/auth', {replace: true})
+                window.location.reload();
+            } else {
+                //какое то действие если не удалось выйти
+            }
+        })
     }
 
   

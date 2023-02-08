@@ -6,33 +6,68 @@ import contentEnterAnimProps from '../../ex/contentEnterAnimProps';
 import RefMain from "./components/RefMain/RefMain";
 import RefVals from "./components/RefVals/RefVals";
 import RefTable from "./components/RefTable/RefTable";
+import orderedElemAnim from "../../ex/orderedElemAnim";
+import { useSelector } from "react-redux";
+import apiService from "../../service/apiService";
+import { useEffect, useState } from "react";
+
+
+const service = new apiService();
+
 
 const RefPage = () => {
+    const {token} = useSelector(state => state);
+    const [list, setList] = useState([])
+    const [collectLoad, setCollectLoad] = useState(false)
+
+    const getReferals = () => {
+        if(token) {
+            service.getReferals(token).then(res => {
+                console.log(res)
+            })
+        }
+    }
+
+    const collectRef = () => {
+        setCollectLoad(true)
+        service.collectRef(token).then(res => {
+            console.log(res)
+        }).finally(_ => {
+            setCollectLoad(false)
+        })
+    }
+
+    useEffect(() => {
+        getReferals();
+    }, [token])
+
 
     return (
         <div className="page RefPage">
             <PageLayout>
                 <div className="sb"></div>
                 <ContentLayout>
-                        <motion.div {...contentEnterAnimProps} className={"RefPage__in"}>
+                        <motion.div {...orderedElemAnim?.container} className={"RefPage__in"}>
                             <div className="RefPage__head">
-                                <div className="RefPage__head_title">
+                                <motion.div {...orderedElemAnim?.item} className="RefPage__head_title">
                                     Данные для рефералки
-                                </div>
-                                <div className="RefPage__head_subtitle">
+                                </motion.div>
+                                <motion.div {...orderedElemAnim?.item} className="RefPage__head_subtitle">
                                     Приглашая друзей в игру, Вы получаете награду с каждого заработанного MPI в игре, а также различные выплаты за определенные достижения в игре!
-                                </div>
+                                </motion.div>
                             </div>
                             <div className="RefPage__body">
-                                <div className="RefPage__body_item">
-                                    <RefMain/>
-                                </div>
-                                <div className="RefPage__body_item">
+                                <motion.div {...orderedElemAnim?.item} className="RefPage__body_item">
+                                    <RefMain 
+                                        load={collectLoad}
+                                        collect={collectRef}/>
+                                </motion.div>
+                                {/* <div className="RefPage__body_item">
                                     <RefVals/>
-                                </div>
-                                <div className="RefPage__body_item">
+                                </div> */}
+                                <motion.div {...orderedElemAnim?.item} className="RefPage__body_item">
                                     <RefTable/>
-                                </div>
+                                </motion.div>
                             </div>
                         </motion.div>
                     </ContentLayout>

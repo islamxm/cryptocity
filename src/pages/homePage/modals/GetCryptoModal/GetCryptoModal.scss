@@ -1,0 +1,26 @@
+.GetCryptoModal {
+    
+    &__head {
+        padding-bottom: 12px;
+        border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+    }
+
+    &__main {
+        max-width: 217px;
+        width: 100%;
+        margin: 0 auto;
+
+        .Input {
+
+            &__label {
+                text-align: center;
+            }
+        }
+    }
+
+    &__action {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}

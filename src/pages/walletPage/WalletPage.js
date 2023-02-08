@@ -4,7 +4,7 @@ import './WalletPage.scss';
 import {motion} from 'framer-motion';
 import contentEnterAnimProps from '../../ex/contentEnterAnimProps';
 import WalletTable from "./components/WalletTable/WalletTable";
-
+import orderedElemAnim from "../../ex/orderedElemAnim";
 
 const WalletPage = () => {
     return (
@@ -12,9 +12,12 @@ const WalletPage = () => {
             <PageLayout>
                 <div className="sb"></div>
                 <ContentLayout>
-                    <motion.div {...contentEnterAnimProps} className={"WalletPage__in"}>
-                        <div className="WalletPage__head">26 Сентября 2022</div>
-                        <WalletTable/>
+                    <motion.div {...orderedElemAnim?.container} className={"WalletPage__in"}>
+                        <motion.div {...orderedElemAnim?.item} className="WalletPage__head">26 Сентября 2022</motion.div>
+                        <motion.div {...orderedElemAnim?.item} className="WalletPage__item">
+                            <WalletTable/>
+                        </motion.div>
+                        
                     </motion.div>
                 </ContentLayout>
             </PageLayout>

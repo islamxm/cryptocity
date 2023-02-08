@@ -15,11 +15,15 @@ import {tokenUpdate} from '../../store/actions';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { mobMenuToggle } from '../../store/actions';
 import LogoutConfirmModal from '../../modals/LogoutConfirmModal/LogoutConfirmModal';
-
+import apiService from '../../service/apiService';
 import Cookies from 'js-cookie';
 
+
+const service = new apiService();
+
+
 const Header = () => {
-    const {lang, mobMenu} = useSelector(state => state);
+    const {lang, mobMenu, token} = useSelector(state => state);
     const dispatch = useDispatch();
     const nav = useNavigate();
     const loc = useLocation();
@@ -38,10 +42,17 @@ const Header = () => {
 
 
     const handleLogout = () => {
-        dispatch(tokenUpdate(null))
-        Cookies.remove('cryptocity-lk-token');
-        nav('/auth', {replace: true})
-        window.location.reload();
+        service.logout(token).then(res => {
+            if(res == 'Ok') {
+                dispatch(tokenUpdate(null))
+                Cookies.remove('cryptocity-lk-token');
+                nav('/auth', {replace: true})
+                window.location.reload();
+            } else {
+                //какое то действие если не удалось выйти
+            }
+        })
+        
     }
 
     const toggleMobMenu = () => {

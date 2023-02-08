@@ -1,0 +1,61 @@
+.BuyCryptoModal {
+    
+    &__head {
+        padding-bottom: 12px;
+        border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        margin-bottom: 35px;
+
+        &_title {
+            margin-bottom: 12px;
+        }
+
+        &_ex {
+            text-align: center;
+            font-size: 18px;
+            line-height: 25px;
+            color: #fff;
+            max-width: 465px;
+            width: 100%;
+            margin: 0 auto;
+        }
+    }
+
+    &__body {
+
+        &_main {
+            display: flex;
+            align-items: flex-end;
+
+            &_inp {
+                max-width: 220px;
+            }
+            
+            &_ex {
+                margin-left: 20px;
+                color: rgba(255, 255, 255, 0.5);
+                font-size: 18px;
+                padding-bottom: 20px;
+                line-height: 25px;
+
+                span {
+                    font-weight: 600;
+                }
+            }
+        }
+
+        &_net {
+            color: #fff;
+            font-size: 18px;
+        }
+    }
+
+    &__action {
+
+        &_item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 12px;
+        }
+    }
+}

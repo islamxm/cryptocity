@@ -30,7 +30,7 @@ const reducer = (state = initState, action) => {
         case 'MOB_MENU':
             return {
                 ...state,
-                mobMenu: !state.mobMenu
+                mobMenu: action.bool
             }
         default:
             return state;

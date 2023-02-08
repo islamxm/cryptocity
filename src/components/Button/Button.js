@@ -7,10 +7,11 @@ const Button = ({
     disabled,
     style,
     onClick,
-    variant = ''
+    variant = '',
+    disableTextTransform
 }) => {
     return (
-        <button className={"Button" + (load ? ' load ' : '') + (disabled ? ' disabled ' : '') + (variant ? ' danger ' : '')} disabled={disabled} onClick={onClick}>
+        <button className={"Button" + (load ? ' load ' : '') + (disabled ? ' disabled ' : '') + ` ${variant}` + (disableTextTransform ? ' remove-tt ' : '')} disabled={disabled} onClick={onClick}>
             {
                 load ? (
                     <div className="Button__load">

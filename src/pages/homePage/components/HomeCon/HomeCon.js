@@ -2,7 +2,7 @@ import './HomeCon.scss';
 import { Row, Col } from 'antd';
 import Button from '../../../../components/Button/Button';
 import { useSelector } from 'react-redux';
-const HomeCon = () => {
+const HomeCon = ({openGetCryptoModal}) => {
     const {userInfo} = useSelector(state => state);
 
     return (
@@ -30,6 +30,7 @@ const HomeCon = () => {
                             </div>
                             <div className="HomeCon__pr_action">
                                 <Button
+                                    onClick={openGetCryptoModal}
                                     text={'ВЫВОД КРИПТЫ'}
                                     />
                             </div>

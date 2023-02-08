@@ -4,7 +4,7 @@ import Button from '../../../../components/Button/Button';
 import { useSelector } from 'react-redux';
 
 
-const HomeBuy = () => {
+const HomeBuy = ({openBuyCryptoModal}) => {
 
     const {userInfo} = useSelector(state => state);
 
@@ -26,6 +26,7 @@ const HomeBuy = () => {
                         <div className="HomeBuy__action">
                             <Button
                                 // disabled={true}
+                                onClick={openBuyCryptoModal}
                                 text={'BUY NOW'}
                                 />
                         </div>

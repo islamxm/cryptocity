@@ -17,28 +17,16 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import AllUnlockModal from './modals/AllUnlockModal/AllUnlockModal';
 import { userInfoUpdate } from '../../store/actions';
+import BuyCryptoModal from './modals/BuyCryptoModal/BuyCryptoModal';
+import GetCryptoModal from './modals/GetCryptoModal/GetCryptoModal';
+import orderedElemAnim from '../../ex/orderedElemAnim';
+import HomePr from './components/HomePr/HomePr';
+
+
+
 const service = new apiService();
 
 
-const container = {
-    hidden: { opacity: 1, scale: 0 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: {
-        delayChildren: 0.1,
-        staggerChildren: 0.1
-      }
-    }
-  };
-
-  const item = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1
-    }
-  };
 
 
 const HomePage = () => {
@@ -46,6 +34,14 @@ const HomePage = () => {
     const {token} = useSelector(state => state);
     const [allUnlockModal, setAllUnlockModal] = useState(false)
     const [UnlocskList, setUnlocksList] = useState([])
+    const [getCryptoModal, setGetCryptoModal] = useState(false)
+    const [buyCryptoModal, setBuyCryptoModal] = useState(false)
+
+    const openBuyCryptoModal = () => setBuyCryptoModal(true)
+    const closeBuyCryptoModal = () => setBuyCryptoModal(false)
+
+    const openGetCryptoModal = () => setGetCryptoModal(true)
+    const closeGetCryptoModal = () => setGetCryptoModal(false)
 
 
     const openAllUnlock = () => setAllUnlockModal(true)
@@ -80,35 +76,47 @@ const HomePage = () => {
                 close={closeAllUnlock}
                 data={UnlocskList}
                 />
+            <BuyCryptoModal 
+                visible={getCryptoModal} 
+                close={closeGetCryptoModal}/>
+            <GetCryptoModal
+                visible={buyCryptoModal}
+                close={closeBuyCryptoModal}
+                />
             <PageLayout>
                 <div className="sb"></div>
                 <ContentLayout>
                     <motion.ul
-                        variants={container}
-                        initial="hidden"
-                        animate="visible"
+                        {...orderedElemAnim?.container}
                         className="HomePage__in">
-                        <motion.li variants={item} className="HomePage__item">
+                        <motion.li {...orderedElemAnim?.item} className="HomePage__item">
                             <HomeBalance/>
                         </motion.li>
-                        <motion.li variants={item} className="HomePage__item">
-                            <HomeBuy/>
+                        <motion.li {...orderedElemAnim?.item} className="HomePage__item">
+                            <HomeBuy
+                                openBuyCryptoModal={openBuyCryptoModal}
+                                />
                         </motion.li>
-                        <motion.li variants={item} className="HomePage__item">
+                        <motion.li {...orderedElemAnim?.item} className="HomePage__item">
                             <HomeDl/>
                         </motion.li>
-                        <motion.li variants={item} className="HomePage__item">
-                            <HomeCon/>
+                        <motion.li {...orderedElemAnim?.item} className="HomePage__item">
+                            <HomeCon openGetCryptoModal={openGetCryptoModal}/>
                         </motion.li>
-                        <motion.li variants={item} className="HomePage__item">
+                        <motion.li {...orderedElemAnim?.item} className="HomePage__item">
                             <HomeUl list={UnlocskList} openAllUnlock={openAllUnlock}/>
                         </motion.li>
-                        <motion.li variants={item} className="HomePage__item">
-                            <HomeSale/>
+                        <motion.li {...orderedElemAnim?.item} className="HomePage__item">
+                            <HomeSale
+                                openBuyCryptoModal={openBuyCryptoModal}
+                                />
                         </motion.li>
-                        {/* <div className="HomePage__item">
-                            <HomeNot/>
-                        </div> */}
+                        <motion.li {...orderedElemAnim?.item} className="HomePage__item">
+                            {/* <HomeNot/> */}
+                            <HomePr
+                                openBuyCryptoModal={openBuyCryptoModal}
+                                />
+                        </motion.li>
                     </motion.ul>
                 </ContentLayout>
                 

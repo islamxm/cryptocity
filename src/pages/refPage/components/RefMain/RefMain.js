@@ -2,7 +2,11 @@ import './RefMain.scss';
 import { Row,Col } from 'antd';
 import Button from '../../../../components/Button/Button';
 
-const RefMain = () => {
+const RefMain = ({collect, load}) => {
+
+
+
+
     return (
         <div className="RefMain panel">
             <div className="RefMain__head panel__head">всего заработано</div>
@@ -14,7 +18,9 @@ const RefMain = () => {
                     <Col span={24}>
                         <div className="RefMain__action">
                             <Button
+                                onClick={collect}
                                 text={'СОБРАТЬ'}
+                                load={load}
                                 />
                         </div>
                     </Col>

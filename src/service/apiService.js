@@ -13,7 +13,7 @@ class apiService {
             let res = await fetch(endpoints.registration, {
                 method: 'POST',
                 body: JSON.stringify(body),
-                headers,
+                // headers,
                 // mode: 'no-cors'
             })
             return await res.text()
@@ -30,6 +30,20 @@ class apiService {
                 // headers
             })
 
+            return await res.text();
+        } catch(err) {
+            console.log(err)
+        }
+    }
+
+    logout = async (token) => {
+        try {
+            let res = await fetch(endpoints.logout, {
+                method: 'POST',
+                body: JSON.stringify({
+                    UserToken: token
+                }),
+            }) 
             return await res.text();
         } catch(err) {
             console.log(err)
@@ -67,6 +81,34 @@ class apiService {
             console.log(err)
         }
     } 
+
+    getReferals = async (token) => {
+        try {
+            let res = await fetch(endpoints.getReferals, {
+                method: 'POST',
+                body: JSON.stringify({
+                    UserToken: token
+                })
+            })
+            return await res.json();
+        } catch(err) {
+            console.log(err)
+        }
+    }
+
+    collectRef = async (token) => {
+        try {
+            let res = await fetch(endpoints.collectRef, {
+                method: 'POST',
+                body: JSON.stringify({
+                    UserToken: token
+                })
+            })
+            return await res.text()
+        } catch(err) {
+            console.log(err)
+        }
+    }
 }
 
 export default apiService;
