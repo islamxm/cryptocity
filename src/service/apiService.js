@@ -1,5 +1,5 @@
 import endpoints from "./endpoints";
-
+import checAuth from "./checkAuth";
 const headers = {
     'Content-type': 'application/json',
     'Accept': 'application/json',
@@ -16,7 +16,9 @@ class apiService {
                 // headers,
                 // mode: 'no-cors'
             })
-            return await res.text()
+            const r = await checAuth(res);
+            return r?.text()
+
         } catch(err) {
             console.log(err)
         }
@@ -30,7 +32,8 @@ class apiService {
                 // headers
             })
 
-            return await res.text();
+            const r = await checAuth(res);
+            return r?.text()
         } catch(err) {
             console.log(err)
         }
@@ -44,7 +47,8 @@ class apiService {
                     UserToken: token
                 }),
             }) 
-            return await res.text();
+            const r = await checAuth(res);
+            return r?.text()
         } catch(err) {
             console.log(err)
         }
@@ -57,7 +61,8 @@ class apiService {
                 body: JSON.stringify(body),
                 headers
             }) 
-            return await res.json()
+            const r = await checAuth(res);
+            return r?.json()
         } catch(err) {
             console.log(err)
         }
@@ -76,7 +81,8 @@ class apiService {
                 })
             })
 
-            return await res.json();
+            const r = await checAuth(res);
+            return r?.json()
         } catch(err) {
             console.log(err)
         }
@@ -90,7 +96,8 @@ class apiService {
                     UserToken: token
                 })
             })
-            return await res.json();
+            const r = await checAuth(res);
+            return r?.json()
         } catch(err) {
             console.log(err)
         }
@@ -104,7 +111,8 @@ class apiService {
                     UserToken: token
                 })
             })
-            return await res.text()
+            const r = await checAuth(res);
+            return r?.text()
         } catch(err) {
             console.log(err)
         }
