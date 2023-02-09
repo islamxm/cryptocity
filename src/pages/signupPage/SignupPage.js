@@ -30,7 +30,7 @@ const SignupPage = () => {
     const [pass, setPass] = useState('')
     const [error, setError] = useState('')
     const [load, setLoad] = useState(false)
-    const [passStrength, setPassStrength] = useState(0);
+    const [passStrength, setPassStrength] = useState(10);
 
     const onSubmit = () => {
         setLoad(true)
@@ -102,18 +102,24 @@ const SignupPage = () => {
                                         value={pass}
                                         placeholder={'Ваш пароль'}
                                         />
-                                    <CustomPassStrength value={passStrength}/>
-                                    <PasswordStrengthBar
-                                         minLength={8}
-                                         onChangeScore={e => {
-                                             setPassStrength(e)
-                                         }}
-                                         className='password-strength'
-                                         style={{marginTop: '20px'}}
-                                         scoreWords={['Очень слабый', 'Слабый', 'Нормальный', 'Нормальный', 'Надежный']}
-                                         shortScoreWord={'Очень короткий'}
-                                         password={pass}
-                                        />
+                                    {
+                                        pass ? (
+                                            <>
+                                                <CustomPassStrength value={passStrength}/>
+                                                <PasswordStrengthBar
+                                                    minLength={6}
+                                                    onChangeScore={e => {
+                                                        setPassStrength(e)
+                                                    }}
+                                                    className='password-strength'
+                                                    style={{marginTop: '20px'}}
+                                                    scoreWords={['Очень слабый', 'Слабый', 'Нормальный', 'Нормальный', 'Надежный']}
+                                                    shortScoreWord={'Очень короткий'}
+                                                    password={pass}
+                                                    />
+                                            </>
+                                        ) : null
+                                    }
                                 </Col>
                                 <Col span={24}>
                                     <div className="SignupPage__body_form_link">
