@@ -28,6 +28,7 @@ const Header = () => {
     const nav = useNavigate();
     const loc = useLocation();
     const [logoutModal, setLogoutModal] = useState(false)
+    const [logoutLoad, setLogoutLoad] = useState(false)
     const openLogoutModal = () => setLogoutModal(true)
     const closeLogoutModal = () => setLogoutModal(false)
 
@@ -42,6 +43,7 @@ const Header = () => {
 
 
     const handleLogout = () => {
+        setLogoutLoad(true)
         service.logout(token).then(res => {
             if(res == 'Ok') {
                 dispatch(tokenUpdate(null))
@@ -51,6 +53,8 @@ const Header = () => {
             } else {
                 //какое то действие если не удалось выйти
             }
+        }).finally(_ => {
+            setLogoutLoad(false)
         })
         
     }
@@ -61,7 +65,7 @@ const Header = () => {
 
     return (
         <header className="Header">
-            <LogoutConfirmModal visible={logoutModal} logout={handleLogout} close={closeLogoutModal}/>
+            <LogoutConfirmModal load={logoutLoad} visible={logoutModal} logout={handleLogout} close={closeLogoutModal}/>
             <Container>
                 <div className="Header__in">
                     <a href="#" className="Header__logo">

@@ -18,12 +18,20 @@ const service = new apiService();
 const RefPage = () => {
     const {token} = useSelector(state => state);
     const [list, setList] = useState([])
+    const [mainInfo, setMainInfo] = useState(null);
     const [collectLoad, setCollectLoad] = useState(false)
 
     const getReferals = () => {
         if(token) {
             service.getReferals(token).then(res => {
-                console.log(res)
+                const r = Object.entries(res?.ReferralsList).map(item => {
+                    return {
+                        ID: item[0],
+                        ...item[1]
+                    }
+                });
+                setList(r);
+                setMainInfo(res?.MainInfo)
             })
         }
     }
@@ -59,6 +67,7 @@ const RefPage = () => {
                             <div className="RefPage__body">
                                 <motion.div {...orderedElemAnim?.item} className="RefPage__body_item">
                                     <RefMain 
+                                        data={mainInfo}
                                         load={collectLoad}
                                         collect={collectRef}/>
                                 </motion.div>
@@ -66,7 +75,9 @@ const RefPage = () => {
                                     <RefVals/>
                                 </div> */}
                                 <motion.div {...orderedElemAnim?.item} className="RefPage__body_item">
-                                    <RefTable/>
+                                    <RefTable
+                                        list={list}
+                                        />
                                 </motion.div>
                             </div>
                         </motion.div>

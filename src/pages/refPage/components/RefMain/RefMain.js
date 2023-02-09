@@ -1,9 +1,12 @@
 import './RefMain.scss';
 import { Row,Col } from 'antd';
 import Button from '../../../../components/Button/Button';
+import { useEffect } from 'react';
 
-const RefMain = ({collect, load}) => {
+const RefMain = ({data, collect, load}) => {
 
+
+  
 
 
 
@@ -13,7 +16,7 @@ const RefMain = ({collect, load}) => {
             <Col span={24}>
                 <Row gutter={[25,25]}>
                     <Col span={24}>
-                        <div className="RefMain__value">$2,411</div>
+                        <div className="RefMain__value">${data?.collectMPItoDollars ? data?.collectMPItoDollars : 0}</div>
                     </Col>
                     <Col span={24}>
                         <div className="RefMain__action">

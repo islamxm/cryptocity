@@ -17,7 +17,8 @@ const Button = ({
                     <div className="Button__load">
                         <ScaleLoader 
                             height={15}
-                            color='var(--aqua)'/>
+                            className="Button__load_el"
+                            />
                     </div>
                 ) : null
             }

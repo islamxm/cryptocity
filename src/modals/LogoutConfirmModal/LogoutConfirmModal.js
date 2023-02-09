@@ -6,7 +6,8 @@ import Button from "../../components/Button/Button";
 const LogoutConfirmModal = ({
     visible,
     close,
-    logout
+    logout,
+    load
 }) => {
     
     const closeHandle = () => {
@@ -40,6 +41,7 @@ const LogoutConfirmModal = ({
                                         onClick={logout}
                                         text={'Выйти'}
                                         variant={'danger'}
+                                        load={load}
                                         />
                                 </Col>
                             </Row>
