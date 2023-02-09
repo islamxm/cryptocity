@@ -56,3 +56,13 @@ body {
 .page {
     padding-top: 75px;
 }
+
+.password-strength {
+    position: absolute !important;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: -1;
+    touch-action: none;
+    visibility: hidden;
+}

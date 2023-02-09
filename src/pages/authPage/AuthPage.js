@@ -13,7 +13,8 @@ import Cookies from 'js-cookie';
 import { useDispatch } from 'react-redux';
 import {tokenUpdate} from '../../store/actions';
 import { useNavigate } from 'react-router-dom';
-
+import notify from '../../ex/notify';
+import { ToastContainer } from 'react-toastify';
 const service = new apiService();
 
 
@@ -45,12 +46,15 @@ const AuthPage = () => {
             switch(res) {
                 case authResTypes.error: 
                     setError('Неверный e-mail или пароль');
+                    notify('Неверный e-mail или пароль')
                     break;
                 case authResTypes.notfound:
                     setError('Пользователь с такими данными не найден')
+                    notify('Пользователь с такими данными не найден')
                     break;
                 case authResTypes.userexist:
                     setError('Пользователь с таким e-mail уже существует')
+                    notify('Пользователь с таким e-mail уже существует')
                     break;
                 default:
                     setError('')
@@ -59,7 +63,6 @@ const AuthPage = () => {
                     nav('/', {replace: true})
                     break;
             }
-            console.log(res)
         }).finally(_ => {
             setLoad(false)
         })
@@ -68,6 +71,7 @@ const AuthPage = () => {
 
     return (
         <div className="page AuthPage">
+            <ToastContainer/>
             <PageLayout>
                 <motion.div className='AuthPage__in' {...contentEnterAnimProps}>
                     <div className="AuthPage__body">
@@ -76,6 +80,8 @@ const AuthPage = () => {
                             <Row gutter={[20,20]}>
                                 <Col span={24}>
                                     <Input
+                                        hideErrorText={true}
+                                        type='email'
                                         error={error}
                                         value={mail}
                                         onChange={e => setMail(e.target.value)}
@@ -83,7 +89,9 @@ const AuthPage = () => {
                                         />
                                 </Col>
                                 <Col span={24}>
+                                    
                                     <Input
+                                        hideErrorText={true}
                                         error={error}
                                         onChange={e => setPass(e.target.value)}
                                         type='password'

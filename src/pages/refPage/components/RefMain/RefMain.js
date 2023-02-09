@@ -21,6 +21,7 @@ const RefMain = ({data, collect, load}) => {
                     <Col span={24}>
                         <div className="RefMain__action">
                             <Button
+                                disabled={!data?.collectMPItoDollars}
                                 onClick={collect}
                                 text={'СОБРАТЬ'}
                                 load={load}

@@ -8,7 +8,8 @@ const Input = ({
     error,
     disabled,
     onChange,
-    value
+    value,
+    hideErrorText
 }) => {
     return (
         <div className={"Input" + (error ? ' error ' : '' + (disabled ? ' disabled ' : ''))}>
@@ -26,7 +27,7 @@ const Input = ({
                 placeholder={placeholder} 
                 className="Input__el" />
             {
-                error ? (
+                error && !hideErrorText ? (
                     <div className="Input__error">
                         {error}
                     </div>

@@ -41,7 +41,9 @@ const RefPage = () => {
         service.collectRef(token).then(res => {
             console.log(res)
         }).finally(_ => {
+            getReferals()
             setCollectLoad(false)
+            
         })
     }
 
