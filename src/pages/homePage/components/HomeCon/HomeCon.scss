@@ -38,7 +38,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-
+            margin-bottom: 25px;
             &_val {
                 text-align: center;
                 color: #B665D8;
@@ -48,6 +48,11 @@
             &_ln {
 
             }
+        }
+
+        &_action {
+            display: flex;
+            justify-content: center;
         }
     }
 }

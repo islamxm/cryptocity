@@ -2,6 +2,7 @@ import './HomeCon.scss';
 import { Row, Col } from 'antd';
 import Button from '../../../../components/Button/Button';
 import { useSelector } from 'react-redux';
+import PrBar from './components/PrBar/PrBar';
 const HomeCon = ({openGetCryptoModal}) => {
     const {userInfo} = useSelector(state => state);
 
@@ -10,7 +11,7 @@ const HomeCon = ({openGetCryptoModal}) => {
             <div className="HomeCon__head panel__head">Вывод MPI</div>
             <Col span={24}>
                 <Row gutter={[20,20]}>
-                    <Col md={16} span={24}>
+                    <Col md={14} span={24}>
                         <div className="HomeCon__list">
                             <div className="HomeCon__item">
                             Минимальная сумма для вывода <span>{userInfo?.OutputMinSum} MPI</span>
@@ -20,12 +21,12 @@ const HomeCon = ({openGetCryptoModal}) => {
                             </div>
                         </div>
                     </Col>
-                    <Col md={8} span={24}>
+                    <Col md={10} span={24}>
                         <div className="HomeCon__pr">
                             <div className="HomeCon__pr_ind">
                                 <div className="HomeCon__pr_ind_val">73%</div>
                                 <div className="HomeCon__pr_ind_ln">
-                                    
+                                    <PrBar value={73}/>
                                 </div>
                             </div>
                             <div className="HomeCon__pr_action">
