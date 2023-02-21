@@ -11,7 +11,10 @@ const endpoints = {
     resetPassword: `${PATH}ResetPassword.php`,
     getUserBalance: `${PATH}GetUserBalance.php`,
     getReferals: `${PATH}GetReferrals.php`,
-    collectRef: `${PATH}CollectReferralsReward.php`
+    collectRef: `${PATH}CollectReferralsReward.php`,
+    createPay: `${BASE_DOMAIN}/merchant/merchant/index.php`,
+    createTransaction: `${PATH}CreateTransaction.php`,
+    payment: `${PATH}Payment/index.php`,
 }
-
+    
 export default endpoints;

@@ -17,7 +17,7 @@ const notify = (text, icon) => {
             borderRadius: 15,
             backgroundColor: 'var(--light_bg)',
             padding: 15
-        }
+        },
     })
 }
 

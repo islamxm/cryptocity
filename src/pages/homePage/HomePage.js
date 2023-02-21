@@ -21,8 +21,8 @@ import BuyCryptoModal from './modals/BuyCryptoModal/BuyCryptoModal';
 import GetCryptoModal from './modals/GetCryptoModal/GetCryptoModal';
 import orderedElemAnim from '../../ex/orderedElemAnim';
 import HomePr from './components/HomePr/HomePr';
-
-
+import { ToastContainer } from 'react-toastify';
+import notify from '../../ex/notify';
 
 const service = new apiService();
 
@@ -80,9 +80,11 @@ const HomePage = () => {
                 visible={getCryptoModal} 
                 close={closeGetCryptoModal}/>
             <GetCryptoModal
+                notify={() => notify('Статус транзакции - успешно')}
                 visible={buyCryptoModal}
                 close={closeBuyCryptoModal}
                 />
+            <ToastContainer/>
             <PageLayout>
                 <div className="sb"></div>
                 <ContentLayout>
@@ -108,13 +110,13 @@ const HomePage = () => {
                         </motion.li>
                         <motion.li {...orderedElemAnim?.item} className="HomePage__item">
                             <HomeSale
-                                openBuyCryptoModal={openBuyCryptoModal}
+                                // openBuyCryptoModal={openBuyCryptoModal}
                                 />
                         </motion.li>
                         <motion.li {...orderedElemAnim?.item} className="HomePage__item">
                             {/* <HomeNot/> */}
                             <HomePr
-                                openBuyCryptoModal={openBuyCryptoModal}
+                                // openBuyCryptoModal={openBuyCryptoModal}
                                 />
                         </motion.li>
                     </motion.ul>

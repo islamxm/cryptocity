@@ -6,9 +6,29 @@
     }
 
     &__main {
-        max-width: 217px;
+        max-width: 350px;
         width: 100%;
         margin: 0 auto;
+
+        &_info {
+            display: flex;
+            align-items: center;
+            
+            color: #fff;
+            &_label {
+                opacity: .6;
+                font-weight: 500;
+                // width: 48%;
+                margin-right: 10px;
+            }
+
+            &_value {
+                //text-align: right;
+                // width: 50%;
+
+            }
+            
+        }
 
         .Input {
 

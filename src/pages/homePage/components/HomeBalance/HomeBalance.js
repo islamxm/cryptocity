@@ -46,9 +46,9 @@ const colors = ['#FF6A6A', '#57B256', '#6AB6FC', '#615BA5', '#5E595F'];
 const HomeBalance = () => {
     const {userInfo} = useSelector(state => state)
 
-    useEffect(() => {
-        console.log(userInfo)
-    }, [userInfo])
+    // useEffect(() => {
+    //     console.log(userInfo)
+    // }, [userInfo])
 
 
     return (
