@@ -107,22 +107,23 @@ const HomeBalance = () => {
                                             },
                                             plotOptions: {
                                                 pie: {
+                                                    expandOnClick: false,
                                                     donut: {
-                                                        
+                                                        size: '80%',
                                                         labels: {
                                                             show: true,
                                                             name: {
                                                                 formatter: (e, i, c) => {
                                                                     return e;
                                                                 },
-                                                                fontSize: 12,
+                                                                offsetY: -2,
+                                                                fontSize: 10,
                                                                 fontWeight: 500,
-                                                                color: 'rgba(255, 255, 255, 0.5)',
-                                                                // show: false
-                                                                
+                                                                color: 'rgba(255, 255, 255, 1)',
+                                                                // show: false  
                                                             },
                                                             value: {
-                                                                color: 'rgba(255, 255, 255, 0.5)',
+                                                                color: 'rgba(255, 255, 255, 1)',
                                                                 formatter: (e) => {
                                                                     return `${e}%`;
                                                                 },
@@ -138,7 +139,7 @@ const HomeBalance = () => {
                                             },
                                             chart: {
                                                 selection: {
-                                                    enabled: true
+                                                    enabled: false
                                                 },
                                             },
                                             

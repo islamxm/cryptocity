@@ -15,7 +15,6 @@ const service = new apiService();
 const GetCryptoModal = ({
     visible,
     close,
-    notify
 }) => {
     const {token} = useSelector(state => state);
     const [load, setLoad] = useState(false);
@@ -51,7 +50,7 @@ const GetCryptoModal = ({
             service.createPay(buyData).then(res => {
                 if(res && res?.result) {
                     setPayData(res)
-                    notify();
+                    notify('Статус транзакции - успешно');
                 }
             }).finally(_ => setLoad(false))
         }
@@ -100,6 +99,7 @@ const GetCryptoModal = ({
                                         </Row>
                                     ) : (
                                         <Input
+                                            type='number'
                                             value={CountCrypto}
                                             onChange={e => setCountCrypto(e.target.value)}
                                             placeholder={0}

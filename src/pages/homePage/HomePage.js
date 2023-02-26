@@ -83,7 +83,6 @@ const HomePage = () => {
                 visible={getCryptoModal} 
                 close={closeGetCryptoModal}/>
             <GetCryptoModal
-                notify={() => notify('Статус транзакции - успешно')}
                 visible={buyCryptoModal}
                 close={closeBuyCryptoModal}
                 />
