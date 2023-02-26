@@ -88,6 +88,14 @@
                 }
             }
         }
+
+        &:nth-child(4) {
+            .HomeBalance__item_name {
+                &:after {
+                    background-color: brown;
+                }
+            }
+        }
     }
 
 }

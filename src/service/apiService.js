@@ -118,45 +118,6 @@ class apiService {
         }
     }
 
-    // Вот url: https://cryptocitygame.ru/merchant/merchant/index.php
-    // Передавал GET-запрос, в headers указывал: X-Requested-With = XMLHttpRequest
-    // Тип данных application/json
-
-    // В теле запроса указывал:
-
-    // {
-    //     "currency":"TRX",
-    //     "amount":"6",
-    //     "order":7739,
-    //     "date":"12.02.2023, 18:17:36"
-    // }
-
-    // в ответ придёт:
-    // {
-    //     "result": true,
-    //     "amount": "6",
-    //     "currency": "TRX",
-    //     "order": 7740,
-    //     "date": "12.02.2023, 18:17:36",
-    //     "address": "TNq8xP49P7tdw9MurRsUQy1YgVwJxprGk6",
-    //     "txn_id": "TNq8xP49P7tdw9MurRsUQy1YgVwJxprGk6"
-    // }
-
-    // createPay = async (currency, amount, order, date) => {
-    //     try {
-    //         let res = await fetch(endpoints.createPay + `?currency=${currency}&amount=${amount}&order=${order}&date=${date}`, {
-    //             method: 'GET',
-    //             headers: {
-    //                 "X-Requested-With": "XMLHttpRequest"
-    //             }
-    //         })
-
-    //         return await res.json();
-    //     } catch(err) {
-    //         console.log(err)
-    //     }
-    // }
-
     createTransaction = async (body) => {
         try {
             let res = await fetch(endpoints.createTransaction, {

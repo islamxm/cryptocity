@@ -13,12 +13,14 @@ import CheckAuth from '../hoc/CheckAuth';
 import AuthPage from '../pages/authPage/AuthPage';
 import { useLocation } from 'react-router-dom';
 import SignupPage from '../pages/signupPage/SignupPage';
+import { ToastContainer } from 'react-toastify';
 
 const App = () => {
     const loc = useLocation();
 
     return (
         <div className="App">
+            <ToastContainer/>
             <Layout>
                 {
                     loc?.pathname !== '/auth' && loc?.pathname !== '/signup' ? (

@@ -3,8 +3,16 @@ import { Row, Col } from 'antd';
 import Button from '../../../../components/Button/Button';
 import { useSelector } from 'react-redux';
 import PrBar from './components/PrBar/PrBar';
+import { useEffect, useState } from 'react';
 const HomeCon = ({openGetCryptoModal}) => {
     const {userInfo} = useSelector(state => state);
+    const [value, setValue] = useState(0)
+
+    useEffect(() => {
+        if(userInfo) {
+            setValue(Number(userInfo?.MPIforOutput) / Number(userInfo?.OutputMinSum) * 100)
+        }
+    }, [userInfo])
 
     return (
         <div className="HomeCon panel">
@@ -24,13 +32,14 @@ const HomeCon = ({openGetCryptoModal}) => {
                     <Col md={10} span={24}>
                         <div className="HomeCon__pr">
                             <div className="HomeCon__pr_ind">
-                                <div className="HomeCon__pr_ind_val">73%</div>
+                                <div className="HomeCon__pr_ind_val">{value > 100 ? 100 : value}%</div>
                                 <div className="HomeCon__pr_ind_ln">
-                                    <PrBar value={73}/>
+                                    <PrBar value={value > 100 ? 100 : value}/>
                                 </div>
                             </div>
                             <div className="HomeCon__pr_action">
                                 <Button
+                                    disabled={value < 100}
                                     onClick={openGetCryptoModal}
                                     text={'ВЫВОД КРИПТЫ'}
                                     />
