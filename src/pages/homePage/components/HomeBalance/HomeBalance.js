@@ -7,51 +7,14 @@ import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 
 
-
-// const chartMock = [
-//     {
-//       id: "elixir",
-//       label: "elixir",
-//       value: 351,
-//       color: "hsl(341, 70%, 50%)"
-//     },
-//     {
-//       id: "sass",
-//       label: "sass",
-//       value: 267,
-//       color: "hsl(275, 70%, 50%)"
-//     },
-//     {
-//       id: "make",
-//       label: "make",
-//       value: 444,
-//       color: "hsl(283, 70%, 50%)"
-//     },
-//     {
-//       id: "lisp",
-//       label: "lisp",
-//       value: 26,
-//       color: "hsl(40, 70%, 50%)"
-//     },
-//     {
-//       id: "erlang",
-//       label: "erlang",
-//       value: 249,
-//       color: "hsl(1, 70%, 50%)"
-//     }
-//   ]
-
 const labels = ['MPI локи','MPI депозит','MPI на балансе'];
-// const colors = ['#FF6A6A', '#57B256', '#6AB6FC', '#615BA5', '#5E595F'];
 
 
 const HomeBalance = () => {
     const {userInfo} = useSelector(state => state)
-    const [dgData, setDgData] = useState([])
     const [mpiLocks, setMpiLocks] = useState(0)
     const [mpiDeposit, setMpiDeposit] = useState(0)
     const [mpiBalance, setMpiBalance] = useState(0)
-    const [mpiOutput, setMpiOutput] = useState(0)
     const [total, setTotal] = useState(0)
 
     useEffect(() => {
@@ -61,7 +24,6 @@ const HomeBalance = () => {
             setMpiLocks(Math.round(Number(userInfo?.MPILocks) / total * 100))
             setMpiDeposit(Math.round(Number(userInfo?.MPIDeposit) / total * 100))
             setMpiBalance(Math.round(Number(userInfo?.MPIBalance) / total * 100))
-            setMpiOutput(Math.round(Number(userInfo?.MPIforOutput) / total * 100))
         }
     }, [userInfo])
 

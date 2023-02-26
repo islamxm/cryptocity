@@ -14,9 +14,6 @@ const total = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1];
 const PrBar = ({value}) => {
     const [pr, setPr] = useState(0)
 
-    useEffect(() => {
-        console.log(pr)
-    }, [pr])
 
     useEffect(() => {
         if(value) {
