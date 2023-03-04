@@ -61,7 +61,7 @@ const BuyCryptoModal = ({
                                                         <>
                                                             <div>Будет зачислено</div>
                                                             <div className="BuyCryptoModal__body_main_ex">
-                                                                Курс на вывод: <span>{userInfo?.HardcoinTokenPrice} MPI</span>
+                                                                Курс на вывод: <span>{userInfo?.HardcoinTokenPrice} USDT</span>
                                                             </div>
                                                         </>
                                                     }
