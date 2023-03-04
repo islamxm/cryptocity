@@ -21,7 +21,10 @@ const HomeCon = ({openGetCryptoModal}) => {
                 <Row gutter={[20,20]}>
                     <Col md={14} span={24}>
                         <div className="HomeCon__list">
-                            <div className="HomeCon__item">
+                            <div className="HomeCon__item light">
+                            Цена токена <span>{userInfo?.HardcoinTokenPrice} USDT</span>
+                            </div>
+                            <div className="HomeCon__item aqua">
                             Минимальная сумма для вывода <span>{userInfo?.OutputMinSum} MPI</span>
                             </div>
                             <div className="HomeCon__item">

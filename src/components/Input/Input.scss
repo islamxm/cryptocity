@@ -53,6 +53,19 @@
     }
 }
 
+.Input.readOnly {
+    pointer-events: none;
+    touch-action: none;
+
+    .Input__el {
+        background-color: var(--gray);
+        border-color: var(--gray);
+        &:focus {
+            border-color: var(--gray);
+        }
+    }
+}
+
 @keyframes shake {
     10%, 90% {
       transform: translate3d(-1px, 0, 0);

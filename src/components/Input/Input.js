@@ -9,10 +9,11 @@ const Input = ({
     disabled,
     onChange,
     value,
-    hideErrorText
+    hideErrorText,
+    readOnly
 }) => {
     return (
-        <div className={"Input" + (error ? ' error ' : '' + (disabled ? ' disabled ' : ''))}>
+        <div className={"Input" + (error ? ' error ' : '' + (disabled ? ' disabled ' : '') + (readOnly ? ' readOnly ' : ''))}>
             {
                 label ? (
                     <div className="Input__label">
@@ -21,6 +22,7 @@ const Input = ({
                 ) : null
             }
             <input 
+                readOnly={readOnly}
                 value={value}
                 onChange={onChange}
                 type={type}

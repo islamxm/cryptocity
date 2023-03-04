@@ -7,6 +7,14 @@
 
     &__main {
 
+        &_item.light {
+            color: #fff;
+            span {
+                color: var(--light_yellow);
+                font-weight: 600;
+            }
+        }
+
         &_item {
             color: rgba(255, 255, 255, 0.5);
             margin-bottom: 10px;
@@ -20,13 +28,6 @@
                 white-space: nowrap;
             }
 
-            &:first-child {
-                color: #fff;
-                span {
-                    color: var(--light_yellow);
-                    font-weight: 600;
-                }
-            }
 
             &:last-child {
                 margin-bottom: 0;

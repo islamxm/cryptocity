@@ -23,18 +23,18 @@
     &__body {
 
         &_main {
-            display: flex;
-            align-items: flex-end;
+            // display: flex;
+            // align-items: flex-end;
 
             &_inp {
-                max-width: 220px;
+                // max-width: 220px;
             }
             
             &_ex {
-                margin-left: 20px;
+
                 color: rgba(255, 255, 255, 0.5);
                 font-size: 18px;
-                padding-bottom: 20px;
+                // padding-bottom: 20px;
                 line-height: 25px;
 
                 span {

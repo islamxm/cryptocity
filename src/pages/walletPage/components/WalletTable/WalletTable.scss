@@ -1,5 +1,5 @@
 .WalletTable {
-    max-width: 710px;
+    // max-width: 710px;
     width: 100%;
     &__table {
         width: 100%;
@@ -48,8 +48,8 @@
         }
 
         &_type {
-            font-size: 24px;
-            line-height: 28px;
+            // font-size: 24px;
+            // line-height: 28px;
         }
 
         &_sum {
@@ -70,10 +70,47 @@
             }
         }
 
+        &_item {
+
+            &_wallet {
+                display: flex;
+                // flex-wrap: wrap;
+
+                &_value {
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                    overflow: hidden;    
+                    max-width: 200px;
+                    width: 100%;
+                }
+
+                button {
+                    opacity: .5;
+                    color: #fff;
+                    cursor: pointer;
+                    font-size: 20px;
+                    line-height: 20px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    margin-left: 10px;
+                    transition: all .3s ease;
+
+                    &:active {
+                        transform: scale(0.95);
+                    }
+
+                    &:hover {
+                        opacity: 1;
+                    }
+                }
+            }
+        }
+
         &_status {
             text-align: center;
-            font-size: 24px;
-            line-height: 28px;
+            // font-size: 24px;
+            // line-height: 28px;
             font-weight: 600;
         }
 

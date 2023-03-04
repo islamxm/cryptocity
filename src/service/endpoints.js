@@ -15,6 +15,7 @@ const endpoints = {
     createPay: `${BASE_DOMAIN}/merchant/merchant/index.php`,
     createTransaction: `${PATH}CreateTransaction.php`,
     payment: `${PATH}Payment/index.php`,
+    getWalletTransactions: `${PATH}GetMyTransactions.php`
 }
     
 export default endpoints;

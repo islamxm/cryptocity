@@ -15,7 +15,10 @@ const HomePr = ({openBuyCryptoModal}) => {
                 <Row gutter={[15,15]}>
                     <Col md={14} span={24}>
                         <div className="HomePr__main">
-                            <div className="HomePr__main_item">
+                            {/* <div className="HomePr__main_item light">
+                            Курс обмена <span>{userInfo?.PrivateSaleTokenPrice}</span>
+                            </div> */}
+                            <div className="HomePr__main_item light">
                             Цена токена <span>{userInfo?.PublicSaleTokenPrice} USDT</span>
                             </div>
                             <div className="HomePr__main_item">

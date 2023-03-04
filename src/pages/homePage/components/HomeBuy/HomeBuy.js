@@ -2,6 +2,7 @@ import './HomeBuy.scss';
 import { Row, Col } from 'antd';
 import Button from '../../../../components/Button/Button';
 import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
 
 
 const HomeBuy = ({openBuyCryptoModal}) => {
@@ -10,7 +11,9 @@ const HomeBuy = ({openBuyCryptoModal}) => {
 
 
 
-
+    useEffect(() => {
+        console.log(userInfo)
+    }, [userInfo])
 
     return (
         <div className="HomeBuy panel">
@@ -25,7 +28,7 @@ const HomeBuy = ({openBuyCryptoModal}) => {
                     <Col span={24}>
                         <div className="HomeBuy__action">
                             <Button
-                                // disabled={true}
+                                disabled={userInfo?.isAppAccount == 0}
                                 onClick={openBuyCryptoModal}
                                 text={'BUY NOW'}
                                 />

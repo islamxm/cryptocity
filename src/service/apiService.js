@@ -148,6 +148,25 @@ class apiService {
             console.log(err)
         }
     }
+
+    getWalletTransactions = async (token) => {
+        try {
+            let res = await fetch(endpoints.getWalletTransactions, {
+                method: 'POST',
+                // headers: {
+                //     ...headers,
+                //     // "X-Requested-With": "XMLHttpRequest"
+                // },
+                body: JSON.stringify({
+                    UserToken: token
+                })
+            }) 
+            const r = await checAuth(res);
+            return r?.json()
+        } catch(err) {
+            console.log(err)
+        }
+    }
 }
 
 export default apiService;

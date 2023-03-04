@@ -2,12 +2,15 @@ import './BuyCryptoModal.scss';
 import { Modal, Row, Col } from 'antd';
 import Button from '../../../../components/Button/Button';
 import Input from '../../../../components/Input/Input';
+import { useSelector } from 'react-redux';
+import { useState } from 'react';
 
 const BuyCryptoModal = ({
     visible,
     close
 }) => {
-
+    const {userInfo} = useSelector(state => state)
+    const [value, setValue] = useState('');
 
     const closeHandle = () => {
         close()
@@ -32,15 +35,44 @@ const BuyCryptoModal = ({
                         <Row gutter={[35, 35]}>
                             <Col span={24}>
                                 <div className="BuyCryptoModal__body_main">
-                                    <div className="BuyCryptoModal__body_main_inp">
-                                        <Input
-                                            label={'Сумма вывода'}
-                                            placeholder={'0'}
-                                            />
-                                    </div>
-                                    <div className="BuyCryptoModal__body_main_ex">
-                                    Доступно: <span>1,598 MPI</span>
-                                    </div>
+                                    <Row gutter={[35,35]}>
+                                        <Col span={12}>
+                                            <div className="BuyCryptoModal__body_main_inp">
+                                                <Input
+                                                    label={
+                                                        <>
+                                                            <div>Сумма вывода</div>
+                                                            <div className="BuyCryptoModal__body_main_ex">
+                                                                Доступно: <span>1,598 MPI</span>
+                                                            </div>
+                                                        </>
+                                                    }
+                                                    placeholder={'0'}
+                                                    value={value}
+                                                    onChange={e => setValue(e.target.value)}
+                                                    />
+                                            </div>
+                                        </Col>
+                                        <Col span={12}>
+                                            <div className="BuyCryptoModal__body_main_inp">
+                                                <Input
+                                                    readOnly={true}
+                                                    label={
+                                                        <>
+                                                            <div>Будет зачислено</div>
+                                                            <div className="BuyCryptoModal__body_main_ex">
+                                                                Курс на вывод: <span>{userInfo?.HardcoinTokenPrice} MPI</span>
+                                                            </div>
+                                                        </>
+                                                    }
+                                                    value={value * Number(userInfo?.HardcoinTokenPrice)}
+                                                    placeholder={'0'}
+                                                    />
+                                            </div>
+                                        </Col>
+                                    </Row>
+                                    
+                                    
                                 </div>
                             </Col>
                             <Col span={24}>

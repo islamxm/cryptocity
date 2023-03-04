@@ -5,6 +5,8 @@ import ReactApexChart from 'react-apexcharts';
 import * as _ from 'lodash';
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
+import Hint from '../../../../components/Hint/Hint';
+import {Popover} from 'antd';
 
 
 const labels = ['MPI локи','MPI депозит','MPI на балансе'];
@@ -27,6 +29,8 @@ const HomeBalance = () => {
         }
     }, [userInfo])
 
+
+    
 
     return (
         <div className="HomeBalance panel">
@@ -131,10 +135,37 @@ const HomeBalance = () => {
                                 <div className="HomeBalance__item_name">MPI на балансе</div>
                                 <div className="HomeBalance__item_value">{userInfo?.MPIBalance}</div>
                             </div>
-                            <div className="HomeBalance__item">
-                                <div className="HomeBalance__item_name">MPI на вывод</div>
-                                <div className="HomeBalance__item_value">{userInfo?.MPIforOutput}</div>
-                            </div>
+                            <Popover
+                                placement={'bottom'}
+                                content={
+                                    <Hint>
+                                        <Row gutter={[50,50]}>
+                                            <Col span={24}>
+                                                <Row gutter={[5,5]}>
+                                                    <Col span={24}>
+                                                        Зарабоитано: <span style={{fontWeight: 700}}>{userInfo?.MPIforOutput} MPI</span> 
+                                                    </Col>
+                                                    <Col span={24}>
+                                                        Куплено: <span style={{fontWeight: 700}}>{userInfo?.MPI_Donat} MPI</span> 
+                                                    </Col>
+                                                </Row>
+                                            </Col>
+                                            <Col span={24}>
+                                                <div style={{height: 1, background: '#fff'}}></div>
+                                            </Col>
+                                            <Col span={24}>
+                                                Вы можете вывести только те MPI, которые заработали в игре, MPI которые были куплены или получены в виде бонусов игры, вывести нельзя.
+                                            </Col>
+                                        </Row>
+                                    </Hint>
+                                }
+                                >
+                                <div className="HomeBalance__item">
+                                    <div className="HomeBalance__item_name">MPI на вывод</div>
+                                    <div className="HomeBalance__item_value">{userInfo?.MPIforOutput}</div>
+                                </div>
+                            </Popover>
+                            
                         </div>
                     </Col>
                 </Row>

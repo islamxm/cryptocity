@@ -21,6 +21,11 @@ input::-webkit-inner-spin-button {
     margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
 }
 
+button {
+    background-color:unset;
+    border: none;
+}
+
 
 body {
     font-family: 'Gilroy', sans-serif;
@@ -72,3 +77,10 @@ body {
     touch-action: none;
     visibility: hidden;
 }
+
+.ant-popover-arrow {
+    display: none !important;
+}
+.ant-popover-inner {
+    background: #344C76 !important;
+} 
