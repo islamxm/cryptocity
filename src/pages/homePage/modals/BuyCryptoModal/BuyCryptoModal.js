@@ -4,6 +4,7 @@ import Button from '../../../../components/Button/Button';
 import Input from '../../../../components/Input/Input';
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
+import * as _ from 'lodash';
 
 const BuyCryptoModal = ({
     visible,
@@ -43,7 +44,7 @@ const BuyCryptoModal = ({
                                                         <>
                                                             <div>Сумма вывода</div>
                                                             <div className="BuyCryptoModal__body_main_ex">
-                                                                Доступно: <span>1,598 MPI</span>
+                                                                Доступно: <span>{_.round(userInfo?.MPIforOutput, 2)} MPI</span>
                                                             </div>
                                                         </>
                                                     }

@@ -4,6 +4,8 @@ import Button from '../../../../components/Button/Button';
 import { useSelector } from 'react-redux';
 import PrBar from './components/PrBar/PrBar';
 import { useEffect, useState } from 'react';
+import * as _ from 'lodash';
+
 const HomeCon = ({openGetCryptoModal}) => {
     const {userInfo} = useSelector(state => state);
     const [value, setValue] = useState(0)
@@ -25,10 +27,10 @@ const HomeCon = ({openGetCryptoModal}) => {
                             Цена токена <span>{userInfo?.HardcoinTokenPrice} USDT</span>
                             </div>
                             <div className="HomeCon__item aqua">
-                            Минимальная сумма для вывода <span>{userInfo?.OutputMinSum} MPI</span>
+                            Минимальная сумма для вывода <span>{_.round(userInfo?.OutputMinSum, 2)} MPI</span>
                             </div>
                             <div className="HomeCon__item">
-                            MPI на счету для вывода <span>{userInfo?.MPIforOutput} MPI</span>
+                            MPI на счету для вывода <span>{_.round(userInfo?.MPIforOutput, 2)} MPI</span>
                             </div>
                         </div>
                     </Col>

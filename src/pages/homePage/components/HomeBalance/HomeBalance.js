@@ -116,7 +116,7 @@ const HomeBalance = () => {
                             </Col>
                             <Col span={24} md={12}>
                                 <div className="HomeBalance__val">
-                                {total - Number(userInfo?.MPIforOutput)} MPI
+                                {_.round(total - Number(userInfo?.MPIforOutput), 2)} MPI
                                 </div>
                             </Col>
                         </Row>
@@ -125,15 +125,15 @@ const HomeBalance = () => {
                         <div className="HomeBalance__list">
                             <div className="HomeBalance__item">
                                 <div className="HomeBalance__item_name">MPI локи</div>
-                                <div className="HomeBalance__item_value">{userInfo?.MPILocks}</div>
+                                <div className="HomeBalance__item_value">{_.round(userInfo?.MPILocks, 2)}</div>
                             </div>
                             <div className="HomeBalance__item">
                                 <div className="HomeBalance__item_name">MPI депозит</div>
-                                <div className="HomeBalance__item_value">{userInfo?.MPIDeposit}</div>
+                                <div className="HomeBalance__item_value">{_.round(userInfo?.MPIDeposit, 2)}</div>
                             </div>
                             <div className="HomeBalance__item">
                                 <div className="HomeBalance__item_name">MPI на балансе</div>
-                                <div className="HomeBalance__item_value">{userInfo?.MPIBalance}</div>
+                                <div className="HomeBalance__item_value">{_.round(userInfo?.MPIBalance, 2)}</div>
                             </div>
                             <Popover
                                 placement={'bottom'}
@@ -143,10 +143,10 @@ const HomeBalance = () => {
                                             <Col span={24}>
                                                 <Row gutter={[5,5]}>
                                                     <Col span={24}>
-                                                        Зарабоитано: <span style={{fontWeight: 700}}>{userInfo?.MPIforOutput} MPI</span> 
+                                                        Зарабоитано: <span style={{fontWeight: 700}}>{_.round(userInfo?.MPIforOutput, 2)} MPI</span> 
                                                     </Col>
                                                     <Col span={24}>
-                                                        Куплено: <span style={{fontWeight: 700}}>{userInfo?.MPI_Donat} MPI</span> 
+                                                        Куплено: <span style={{fontWeight: 700}}>{_.round(userInfo?.MPI_Donat, 2)} MPI</span> 
                                                     </Col>
                                                 </Row>
                                             </Col>
@@ -162,7 +162,7 @@ const HomeBalance = () => {
                                 >
                                 <div className="HomeBalance__item">
                                     <div className="HomeBalance__item_name">MPI на вывод</div>
-                                    <div className="HomeBalance__item_value">{userInfo?.MPIforOutput}</div>
+                                    <div className="HomeBalance__item_value">{_.round(userInfo?.MPIforOutput, 2)}</div>
                                 </div>
                             </Popover>
                             
