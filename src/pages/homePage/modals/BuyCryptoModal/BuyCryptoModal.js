@@ -3,19 +3,37 @@ import { Modal, Row, Col } from 'antd';
 import Button from '../../../../components/Button/Button';
 import Input from '../../../../components/Input/Input';
 import { useSelector } from 'react-redux';
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import * as _ from 'lodash';
+import { useMetaMask } from "metamask-react";
 
 const BuyCryptoModal = ({
     visible,
     close
 }) => {
+    const { status, connect, account, chainId, ethereum } = useMetaMask();
+
     const {userInfo} = useSelector(state => state)
     const [value, setValue] = useState('');
+    const [startConnect, setStartConnect] = useState(false)
+    const [mmWallet, setMmWallet] = useState('')
 
     const closeHandle = () => {
         close()
+        setValue('')
+        setMmWallet('')
+        setStartConnect(false)
     }
+
+    useEffect(() => {
+        if(status === 'connected' && startConnect && account) {
+            setMmWallet(account)
+        } else {
+            setMmWallet('')
+        }
+    }, [status, startConnect, account])
+
+
 
     return (
         <Modal
@@ -83,6 +101,8 @@ const BuyCryptoModal = ({
                                     </Col>
                                     <Col span={24}>
                                         <Input
+                                            value={mmWallet}
+                                            onChange={e => setMmWallet(e.target.value)}
                                             placeholder={'0'}
                                             label={'Введите номер кошелька'}
                                             />
@@ -93,6 +113,12 @@ const BuyCryptoModal = ({
                                 <div className="BuyCryptoModal__action">
                                     <div className="BuyCryptoModal__action_item">
                                         <Button
+                                            load={status === 'initializing' || status === 'connecting'}
+                                            onClick={() => {
+                                                connect()
+                                                setStartConnect(true)
+                                            }}
+                                            disabled={status === 'unavailable'}
                                             text={'Подтянуть из metamask'}
                                             disableTextTransform={true}
                                             />
