@@ -47,15 +47,15 @@ const AuthPage = () => {
             switch(res) {
                 case authResTypes.error: 
                     setError('Неверный e-mail или пароль');
-                    notify('Неверный e-mail или пароль')
+                    notify('Неверный e-mail или пароль', 'ERROR')
                     break;
                 case authResTypes.notfound:
                     setError('Пользователь с такими данными не найден')
-                    notify('Пользователь с такими данными не найден')
+                    notify('Пользователь с такими данными не найден', 'ERROR')
                     break;
                 case authResTypes.userexist:
                     setError('Пользователь с таким e-mail уже существует')
-                    notify('Пользователь с таким e-mail уже существует')
+                    notify('Пользователь с таким e-mail уже существует', 'ERROR')
                     break;
                 default:
                     setError('')

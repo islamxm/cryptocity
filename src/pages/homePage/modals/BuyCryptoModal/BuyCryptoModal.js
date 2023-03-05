@@ -6,14 +6,21 @@ import { useSelector } from 'react-redux';
 import { useCallback, useEffect, useState } from 'react';
 import * as _ from 'lodash';
 import { useMetaMask } from "metamask-react";
+import apiService from '../../../../service/apiService';
+import notify from '../../../../ex/notify';
+
+const service = new apiService()
+
+
 
 const BuyCryptoModal = ({
     visible,
     close
 }) => {
     const { status, connect, account, chainId, ethereum } = useMetaMask();
-
+    const {token} = useSelector(s => s)
     const {userInfo} = useSelector(state => state)
+    const [load, setLoad] = useState(false)
     const [value, setValue] = useState('');
     const [startConnect, setStartConnect] = useState(false)
     const [mmWallet, setMmWallet] = useState('')
@@ -32,6 +39,40 @@ const BuyCryptoModal = ({
             setMmWallet('')
         }
     }, [status, startConnect, account])
+
+
+
+    const onSave = () => {
+        setLoad(true)
+        const body = {
+            CountCrypto: value,
+            Wallet: mmWallet
+        }
+        service.outputTransaction(token, body).then(res => {
+            console.log(res)
+            if(res?.Error) {
+                if(res?.Error === 'No required quantity MPI on balance') {
+                    notify('Не хватает mpi на балансе для вывода', 'ERROR')
+                }
+                if(res?.Error === 'No link to application') {
+                    notify('Личный кабинет не связан с приложением', 'ERROR')
+                }
+                if(res?.Error === 'Count is less than allowed') {
+                    notify('Количество для вывода меньше допустимого', 'ERROR')
+                } 
+                if(res?.Error === 'No user wallet') {
+                    notify('Не задали кошелёк', 'ERROR')
+                }
+                if(res?.Notice) {
+                    notify('Транзакция создана', 'SUCCESS')
+                    closeHandle()
+                } 
+            }
+        }).finally(_ => {
+            setLoad(false)
+            
+        })
+    }
 
 
 
@@ -125,6 +166,9 @@ const BuyCryptoModal = ({
                                     </div>
                                     <div className="BuyCryptoModal__action_item">
                                         <Button
+                                            disabled={!mmWallet || !value}
+                                            onClick={onSave}
+                                            load={load}
                                             variant='default-fill'
                                             text={'Отправить запрос'}
                                             disableTextTransform={true}

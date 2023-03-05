@@ -37,7 +37,7 @@ const HomeCon = ({openGetCryptoModal}) => {
                     <Col md={10} span={24}>
                         <div className="HomeCon__pr">
                             <div className="HomeCon__pr_ind">
-                                <div className="HomeCon__pr_ind_val">{value > 100 ? 100 : value}%</div>
+                                <div className="HomeCon__pr_ind_val">{value > 100 ? 100 : Math.round(value)}%</div>
                                 <div className="HomeCon__pr_ind_ln">
                                     <PrBar value={value > 100 ? 100 : value}/>
                                 </div>

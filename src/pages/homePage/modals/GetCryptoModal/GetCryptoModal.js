@@ -39,7 +39,7 @@ const GetCryptoModal = ({
                 TransactionType: 2,
                 CountCrypto
             }).then(res => {
-                console.log(res)
+             
                 if (res) setBuyData(res)
             })
         }
@@ -50,7 +50,9 @@ const GetCryptoModal = ({
             service.createPay(buyData).then(res => {
                 if(res && res?.result) {
                     setPayData(res)
-                    notify('Статус транзакции - успешно');
+                    notify('Статус транзакции - успешно', 'SUCCESS');
+                } else {
+                    notify('Произошла ошибка', 'ERROR')
                 }
             }).finally(_ => setLoad(false))
         }

@@ -44,23 +44,23 @@ const SignupPage = () => {
             switch(res) {
                 case authResTypes.error: 
                     setError('Неверный e-mail или пароль');
-                    notify('Неверный e-mail или пароль')
+                    notify('Неверный e-mail или пароль', 'ERROR')
                     break;
                 case authResTypes.notfound:
                     setError('Пользователь с такими данными не найден')
-                    notify('Пользователь с такими данными не найден')
+                    notify('Пользователь с такими данными не найден', 'ERROR')
                     break;
                 case authResTypes.userexist:
                     setError('Пользователь с таким e-mail уже существует')
-                    notify('Пользователь с таким e-mail уже существует')
+                    notify('Пользователь с таким e-mail уже существует', 'ERROR')
                     break;
                 case authResTypes.mailerror:
                     setError('Произошла ошибка. Сообщение не отправлено')
-                    notify('Произошла ошибка. Сообщение не отправлено')
+                    notify('Произошла ошибка. Сообщение не отправлено', 'ERROR')
                     break;
                 case authResTypes.sendmail:
                     setError('')
-                    notify('На вашу почту отправлена ссылка для авторизации')
+                    notify('На вашу почту отправлена ссылка для авторизации', 'SUCCESS')
                     break;
                 default:
                     setError('')
