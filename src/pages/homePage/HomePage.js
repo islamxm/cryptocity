@@ -79,9 +79,7 @@ const HomePage = () => {
                 close={closeAllUnlock}
                 data={UnlocskList}
                 />
-            <BuyCryptoModal 
-                visible={getCryptoModal} 
-                close={closeGetCryptoModal}/>
+            
             <GetCryptoModal
                 visible={buyCryptoModal}
                 close={closeBuyCryptoModal}

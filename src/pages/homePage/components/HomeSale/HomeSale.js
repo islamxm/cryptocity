@@ -2,14 +2,37 @@ import './HomeSale.scss';
 import { Row,Col } from 'antd';
 import Button from '../../../../components/Button/Button';
 import { useSelector } from 'react-redux';
-
-
-const HomeSale = ({openBuyCryptoModal}) => {
+import { useState } from 'react';
+import GetCryptoModal from '../../modals/GetCryptoModal/GetCryptoModal';
+import InfoModal from '../../modals/InfoModal/InfoModal';
+const HomeSale = () => {
     const {userInfo} = useSelector(state => state);
+    const [buyModal, setBuyModal] = useState(false);
+    const [infoModal, setInfoModal] = useState(false)
 
+    const openBuyModal = () => {
+        if(userInfo?.TransactionType !== '0') {
+            setInfoModal(true)
+        } else {
+            setBuyModal(true)
+        }
+    }
+    const closeBuyModal = () => setBuyModal(false)
+
+    
 
     return (
         <div className="HomeSale panel">
+            <InfoModal
+                type={userInfo?.TransactionType}
+                visible={infoModal}
+                close={() => setInfoModal(false)}
+                />
+            <GetCryptoModal
+                visible={buyModal}
+                close={closeBuyModal}
+                type={'0'}
+                />
             <div className="HomeSale__head panel__head">PUBLIC SALE</div>
             <Col span={24}>
                 <Row gutter={[15,15]}>
@@ -32,7 +55,7 @@ const HomeSale = ({openBuyCryptoModal}) => {
                     <Col span={24} md={10}>
                         <div className="HomeSale__action">
                             <Button
-                                onClick={openBuyCryptoModal}
+                                onClick={openBuyModal}
                                 text={'BUY NOW'}
                                 />
                         </div>

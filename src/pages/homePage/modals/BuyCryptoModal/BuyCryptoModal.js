@@ -15,7 +15,7 @@ const service = new apiService()
 
 const BuyCryptoModal = ({
     visible,
-    close
+    close,
 }) => {
     const { status, connect, account, chainId, ethereum } = useMetaMask();
     const {token} = useSelector(s => s)

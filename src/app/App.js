@@ -22,10 +22,10 @@ const App = () => {
         <div className="App">
             <ToastContainer/>
             <Layout>
+                <Header home={loc?.pathname !== '/auth' && loc?.pathname !== '/signup'}/>
                 {
                     loc?.pathname !== '/auth' && loc?.pathname !== '/signup' ? (
                         <>
-                            <Header/>
                             <Menu/>
                         </>
                     ) : null

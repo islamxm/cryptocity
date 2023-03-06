@@ -22,10 +22,6 @@ const tableHead = [
 
 const WalletTable = ({list = []}) => {
 
-    useEffect(() => {
-        console.log(list)
-    }, [list])
-
 
     const copyValue = (text) => {
         navigator.clipboard.writeText(text).then(res => {
