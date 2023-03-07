@@ -22,7 +22,7 @@ import Cookies from 'js-cookie';
 const service = new apiService();
 
 
-const Header = () => {
+const Header = ({home}) => {
     const {lang, mobMenu, token} = useSelector(state => state);
     const dispatch = useDispatch();
     const nav = useNavigate();
@@ -68,43 +68,48 @@ const Header = () => {
             <LogoutConfirmModal load={logoutLoad} visible={logoutModal} logout={handleLogout} close={closeLogoutModal}/>
             <Container>
                 <div className="Header__in">
-                    <a href="#" className="Header__logo">
-                        <img src={logo} alt="Crypto-City" />
+                    <a href="http://mycryptown.io" target={'_blank'} className="Header__logo">
+                        <img src={logo} alt="Crypto-City"/>
                     </a>
-                    <div className="Header__menu">
-                        <div className="Header__menu_nav">
-                            <Link className="Header__menu_nav_item" to={'/'}>О нас</Link>
-                            <Link className="Header__menu_nav_item" to={'/'}>Проекты</Link>
-                            <Link className="Header__menu_nav_item" to={'/'}>Вывод крипты</Link>
-                        </div>
-                        <div className="Header__menu_auth">
-                            <button onClick={openLogoutModal} className="Header__menu_auth_btn">
-                                <div className="Header__menu_auth_btn_text">Выйти</div>
-                                <div className="Header__menu_auth_btn_icon">
-                                    <FiArrowDownRight/>
+                    {
+                        home ? (
+                            <div className="Header__menu">
+                                {/* <div className="Header__menu_nav">
+                                    <Link className="Header__menu_nav_item" to={'/'}>О нас</Link>
+                                    <Link className="Header__menu_nav_item" to={'/'}>Проекты</Link>
+                                    <Link className="Header__menu_nav_item" to={'/'}>Вывод крипты</Link>
+                                </div> */}
+                                <div className="Header__menu_auth">
+                                    <button onClick={openLogoutModal} className="Header__menu_auth_btn">
+                                        <div className="Header__menu_auth_btn_text">Выйти</div>
+                                        <div className="Header__menu_auth_btn_icon">
+                                            <FiArrowDownRight/>
+                                        </div>
+                                    </button>
                                 </div>
-                            </button>
-                        </div>
-                        <Dropdown
-                            trigger={['click']}
-                            overlay={<HeaderLangDrop onSelect={selectLang} value={lang}/>}
-                            >
-                            <div className="Header__menu_lang">
-                                {lang}
-                                <div className="Header__menu_lang_icon">
-                                <FiChevronDown/>
+                                <Dropdown
+                                    trigger={['click']}
+                                    overlay={<HeaderLangDrop onSelect={selectLang} value={lang}/>}
+                                    >
+                                    <div className="Header__menu_lang">
+                                        {lang}
+                                        <div className="Header__menu_lang_icon">
+                                        <FiChevronDown/>
+                                        </div>
+                                        
+                                    </div>
+                                </Dropdown>
+                                <div className="Header__menu_burger">
+                                    <button onClick={toggleMobMenu} className={"Header__menu_burger_btn" + (mobMenu ? ' active ' : '')}>
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
+                                    </button>
                                 </div>
-                                
                             </div>
-                        </Dropdown>
-                        <div className="Header__menu_burger">
-                            <button onClick={toggleMobMenu} className={"Header__menu_burger_btn" + (mobMenu ? ' active ' : '')}>
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                            </button>
-                        </div>
-                    </div>
+                        ) : null
+                    }
+                    
                 </div>
             </Container>
         </header>

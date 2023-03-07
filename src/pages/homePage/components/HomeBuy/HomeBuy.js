@@ -2,21 +2,24 @@ import './HomeBuy.scss';
 import { Row, Col } from 'antd';
 import Button from '../../../../components/Button/Button';
 import { useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import GetCryptoModal from '../../modals/GetCryptoModal/GetCryptoModal';
 
-
-const HomeBuy = ({openBuyCryptoModal}) => {
-
+const HomeBuy = () => {
+    const [buyModal, setBuyModal] = useState(false)
     const {userInfo} = useSelector(state => state);
 
+    const openBuyModal = () => setBuyModal(true)
+    const closeBuyModal = () => setBuyModal(false)
 
-
-    useEffect(() => {
-        console.log(userInfo)
-    }, [userInfo])
 
     return (
         <div className="HomeBuy panel">
+            <GetCryptoModal
+                visible={buyModal}
+                close={closeBuyModal}
+                type={'2'}
+                />
             <div className="HomeBuy__head panel__head">Купить MPI в игру</div>
             <Col span={24}>
                 <Row gutter={[40,40]}>
@@ -29,7 +32,7 @@ const HomeBuy = ({openBuyCryptoModal}) => {
                         <div className="HomeBuy__action">
                             <Button
                                 disabled={userInfo?.isAppAccount == 0}
-                                onClick={openBuyCryptoModal}
+                                onClick={openBuyModal}
                                 text={'BUY NOW'}
                                 />
                         </div>

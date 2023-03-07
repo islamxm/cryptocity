@@ -167,6 +167,22 @@ class apiService {
             console.log(err)
         }
     }
+
+    outputTransaction = async (token, body) => {
+        try {
+            let res = await fetch(endpoints.outputTransaction, {
+                method: 'POST',
+                body: JSON.stringify({
+                    UserToken: token,
+                    ...body
+                })
+            })
+            const r = await checAuth(res);
+            return r?.json()
+        } catch(err) {
+            console.log(err)
+        }
+    }
 }
 
 export default apiService;

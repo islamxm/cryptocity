@@ -5,6 +5,7 @@ import {MdOutlineContentCopy} from 'react-icons/md';
 import Hint from '../../../../components/Hint/Hint';
 import { Popover } from 'antd';
 import {AiOutlineInfoCircle} from 'react-icons/ai'
+import * as _ from 'lodash';
 
 
 
@@ -20,10 +21,6 @@ const tableHead = [
 
 
 const WalletTable = ({list = []}) => {
-
-    useEffect(() => {
-        console.log(list)
-    }, [list])
 
 
     const copyValue = (text) => {

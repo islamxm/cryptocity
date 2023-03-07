@@ -6,13 +6,17 @@ import 'react-toastify/dist/ReactToastify.css';
 import './styles/styles.scss';
 import { Provider } from 'react-redux';
 import store from './store/store';
+import { MetaMaskProvider } from "metamask-react";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Router>
       <Provider store={store}>
+        <MetaMaskProvider>
         <App />
+        </MetaMaskProvider>
+       
       </Provider>
       
     </Router>

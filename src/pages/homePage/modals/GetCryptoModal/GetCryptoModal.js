@@ -15,14 +15,19 @@ const service = new apiService();
 const GetCryptoModal = ({
     visible,
     close,
+    type
 }) => {
-    const {token} = useSelector(state => state);
+    const {token, userInfo} = useSelector(state => state);
     const [load, setLoad] = useState(false);
     const [buyData, setBuyData] = useState(null);
     const [CountCrypto, setCountCrypto] = useState('')
     const [payData, setPayData] = useState(null)
 
-    
+
+    useEffect(() => {
+        console.log(userInfo)
+    }, [userInfo])
+
     const closeHandle = () => {
         setBuyData(null)
         setPayData(null)
@@ -36,11 +41,14 @@ const GetCryptoModal = ({
         if(token) {
             service.createTransaction({
                 UserToken: token,
-                TransactionType: 2,
-                CountCrypto
+                TransactionType: type ? type : '0',
+                CountCrypto: Number(CountCrypto)
             }).then(res => {
                 console.log(res)
                 if (res) setBuyData(res)
+            }).catch(err => {
+                notify('Произошла ошибка', 'ERROR')
+                setLoad(false)
             })
         }
     }
@@ -48,9 +56,12 @@ const GetCryptoModal = ({
     useEffect(() => {
         if(token && buyData) {
             service.createPay(buyData).then(res => {
+                console.log(res)
                 if(res && res?.result) {
                     setPayData(res)
-                    notify('Статус транзакции - успешно');
+                    notify('Статус транзакции - успешно', 'SUCCESS');
+                } else {
+                    notify('Выбранный тип транзакции не доступен, пожалуйста, выберите другой', 'ERROR')
                 }
             }).finally(_ => setLoad(false))
         }
