@@ -14,6 +14,7 @@ import AuthPage from '../pages/authPage/AuthPage';
 import { useLocation } from 'react-router-dom';
 import SignupPage from '../pages/signupPage/SignupPage';
 import { ToastContainer } from 'react-toastify';
+import ResetPage from '../pages/authPage/ResetPage';
 
 const App = () => {
     const loc = useLocation();
@@ -23,7 +24,7 @@ const App = () => {
             <ToastContainer/>
             <Layout>
                 {
-                    loc?.pathname !== '/auth' && loc?.pathname !== '/signup' ? (
+                    loc?.pathname !== '/auth' && loc?.pathname !== '/signup' && loc?.pathname !== '/reset' ? (
                         <>
                             <Header/>
                             <Menu/>
@@ -34,6 +35,7 @@ const App = () => {
                 
                 <Routes>
                     <Route path='/auth' element={<CheckAuth><AuthPage/></CheckAuth>}/>
+                    <Route path='/reset' element={<ResetPage/>}/>
                     <Route path='/' element={<CheckAuth><HomePage/></CheckAuth>}/>
                     <Route path='/referals' element={<CheckAuth><RefPage/></CheckAuth>}/>
                     <Route path='/wallet' element={<CheckAuth><WalletPage/></CheckAuth>}/>

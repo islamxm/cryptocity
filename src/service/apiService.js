@@ -62,7 +62,7 @@ class apiService {
                 headers
             }) 
             const r = await checAuth(res);
-            return r?.json()
+            return r?.text()
         } catch(err) {
             console.log(err)
         }

@@ -21,19 +21,19 @@ const service = new apiService();
 const authResTypes = {
     error: 'WrongMailOrPass',
     notfound: 'UserNotFound',
-    userexist: 'UserExist'
+    userexist: 'UserExist',
+    success: 'LinkSendToMail'
 }
 
 
-const AuthPage = () => {
+const ResetPage = () => {
     const disaptch = useDispatch()
     const nav = useNavigate();
     //const {token} = useSelector(state => state)
-    const [mail,setMail] = useState('')
     const [pass, setPass] = useState('')
+    const [mail,setMail] = useState('')
     const [load, setLoad] = useState(false)
     const [error, setError] = useState('')
-    const [reset, setReset] = useState(false)
 
 
     const onSubmit = () => {
@@ -41,29 +41,37 @@ const AuthPage = () => {
         const body = {
             mail,
             password: pass,
-            isAdmin: 0
+            // isAdmin: 0
         }
 
-        service.auth(body).then(res => {
+        service.resetPass(body).then(res => {
+            console.log(res)
             switch(res) {
                 case authResTypes.error: 
                     setError('Неверный e-mail или пароль');
-                    notify('Неверный e-mail или пароль')
+                    notify('Неверный e-mail или пароль', 'ERROR')
                     break;
                 case authResTypes.notfound:
                     setError('Пользователь с такими данными не найден')
-                    notify('Пользователь с такими данными не найден')
+                    notify('Пользователь с такими данными не найден', 'ERROR')
                     break;
                 case authResTypes.userexist:
                     setError('Пользователь с таким e-mail уже существует')
-                    notify('Пользователь с таким e-mail уже существует')
+                    notify('Пользователь с таким e-mail уже существует', 'ERROR')
+                    break;
+                case authResTypes.success:
+                    setError('')
+                    notify('Переходите на почту для подтверждения смены пароля', 'SUCCESS')
+                    nav('/auth', {replace: true})
                     break;
                 default:
-                    setError('')
-                    Cookies.set('cryptocity-lk-token', res)
-                    disaptch(tokenUpdate(res))
-                    nav('/', {replace: true})
-                    break;
+                    console.log(res)
+                    return null;
+                    // setError('')
+                    // Cookies.set('cryptocity-lk-token', res)
+                    // disaptch(tokenUpdate(res))
+                    // nav('/', {replace: true})
+                    // break;
             }
         }).finally(_ => {
             setLoad(false)
@@ -77,7 +85,7 @@ const AuthPage = () => {
             <PageLayout>
                 <motion.div className='AuthPage__in' {...contentEnterAnimProps}>
                     <div className="AuthPage__body">
-                        <div className="AuthPage__body_head">Войти</div>
+                        <div className="AuthPage__body_head">Восстановить пароль</div>
                         <div className="AuthPage__body_form">
                             <Row gutter={[20,20]}>
                                 <Col span={24}>
@@ -98,24 +106,24 @@ const AuthPage = () => {
                                         onChange={e => setPass(e.target.value)}
                                         type='password'
                                         value={pass}
-                                        placeholder={'Ваш пароль'}
+                                        placeholder={'Новый пароль'}
                                         />
                                 </Col>
-                                <Col span={24}>
+                                {/* <Col span={24}>
                                     <div className="AuthPage__body_form_link">
                                         Нет аккаунта? <Link to={'/signup'}>Регистрация</Link> 
                                     </div>
-                                </Col>
-                                <Col span={24}>
+                                </Col> */}
+                                {/* <Col span={24}>
                                     <div className="AuthPage__body_form_link">
-                                        Забыли пароль? <Link to={'/reset'}>Восстановить</Link> 
+                                        Забыли пароль? <Link to={'/auth'}>Восстановить</Link> 
                                     </div>
-                                </Col>
+                                </Col> */}
                                 <Col span={24}>
                                     <div className="AuthPage__body_form_action">
                                     <Button
                                         disabled={!mail || !pass}
-                                        text={'Войти'}
+                                        text={'Восстановить'}
                                         load={load}
                                         onClick={onSubmit}
                                         />
@@ -131,4 +139,4 @@ const AuthPage = () => {
     )
 }
 
-export default AuthPage;
+export default ResetPage;
