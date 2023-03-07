@@ -1,0 +1,80 @@
+.BuyModal {
+
+    &__head {
+        padding-bottom: 10px;
+        border-bottom: 1px solid var(--gray);
+        &_title {
+            margin-bottom: 15px;
+        }
+
+        &_subtitle {
+            color: #fff;
+            span {
+                font-weight: 600;
+                color: var(--red);
+            }
+        }
+
+        &_subtitle.center {
+            text-align: center;
+        }
+    }
+
+    &__body {
+        padding: 20px 0;
+
+        &_main {
+
+            &_part {
+                &_label {
+                    margin-bottom: 5px;
+                    span {
+                        display: block;
+                        color: #fff;
+                    }
+                }
+            }
+        }
+
+        &_wallet {
+            &_label {
+                color: #fff;
+                font-size: 20px;
+
+            }
+        }
+
+        &_action {
+
+            &_item {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+
+        &_list {
+
+            &_item {
+                margin-bottom: 15px;
+                font-size: 18px;
+                line-height: 25px;
+                color: #fff;
+                &:last-child {
+                    margin-bottom: 0;
+                }
+
+                &_name {
+                    opacity: .7;
+                }
+
+                &_value {
+                    font-weight: 700;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                }
+            }
+        }
+    }
+}

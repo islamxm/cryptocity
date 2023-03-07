@@ -4,6 +4,7 @@ import Button from '../../../../components/Button/Button';
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import GetCryptoModal from '../../modals/GetCryptoModal/GetCryptoModal';
+import BuyGmpiModal from '../../modals/BuyModal/BuyGmpiModal';
 
 const HomeBuy = () => {
     const [buyModal, setBuyModal] = useState(false)
@@ -15,10 +16,15 @@ const HomeBuy = () => {
 
     return (
         <div className="HomeBuy panel">
-            <GetCryptoModal
+            {/* <GetCryptoModal
                 visible={buyModal}
                 close={closeBuyModal}
                 type={'2'}
+                /> */}
+            <BuyGmpiModal
+                open={buyModal}
+                onClose={closeBuyModal}
+                width={600}
                 />
             <div className="HomeBuy__head panel__head">Купить MPI в игру</div>
             <Col span={24}>

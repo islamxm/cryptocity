@@ -66,7 +66,8 @@ const ResetPage = () => {
                     break;
                 default:
                     console.log(res)
-                    return null;
+                    notify('Неопознанное действие', 'INFO')
+                    // return null;
                     // setError('')
                     // Cookies.set('cryptocity-lk-token', res)
                     // disaptch(tokenUpdate(res))

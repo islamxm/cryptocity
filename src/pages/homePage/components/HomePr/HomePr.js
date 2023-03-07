@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import GetCryptoModal from '../../modals/GetCryptoModal/GetCryptoModal';
 import { useState } from 'react';
 import InfoModal from '../../modals/InfoModal/InfoModal';
+import BuyPrivateModal from '../../modals/BuyModal/BuyPrivateModal';
 
 const HomePr = () => {
     const {userInfo} = useSelector(state => state);
@@ -26,11 +27,12 @@ const HomePr = () => {
                 visible={infoModal}
                 close={() => setInfoModal(false)}
                 />
-            <GetCryptoModal
-                visible={buyModal}
-                close={closeBuyModal}
-                type='1'
+            <BuyPrivateModal
+                onClose={closeBuyModal}
+                width={600}
+                open={buyModal}
                 />
+            
             <div className="HomePr__head panel__head">PRIVATE SALE</div>
             <Col span={24}>
                 <Row gutter={[15,15]}>
@@ -40,7 +42,7 @@ const HomePr = () => {
                             Курс обмена <span>{userInfo?.PrivateSaleTokenPrice}</span>
                             </div> */}
                             <div className="HomePr__main_item light">
-                            Цена токена <span>{userInfo?.PublicSaleTokenPrice} USDT</span>
+                            Цена токена <span>{userInfo?.PrivateSaleTokenPrice} USDT</span>
                             </div>
                             <div className="HomePr__main_item">
                             Вестинг -20% TGE, далее линейный вестинг в течение 6 месяцев <span>1,000/2,500 MPI</span>

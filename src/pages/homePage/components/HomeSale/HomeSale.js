@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { useState } from 'react';
 import GetCryptoModal from '../../modals/GetCryptoModal/GetCryptoModal';
 import InfoModal from '../../modals/InfoModal/InfoModal';
+import BuyPublicModal from '../../modals/BuyModal/BuyPublicModal';
 const HomeSale = () => {
     const {userInfo} = useSelector(state => state);
     const [buyModal, setBuyModal] = useState(false);
@@ -28,10 +29,15 @@ const HomeSale = () => {
                 visible={infoModal}
                 close={() => setInfoModal(false)}
                 />
-            <GetCryptoModal
+            {/* <GetCryptoModal
                 visible={buyModal}
                 close={closeBuyModal}
                 type={'0'}
+                /> */}
+            <BuyPublicModal
+                open={buyModal}
+                onClose={closeBuyModal}
+                width={600}
                 />
             <div className="HomeSale__head panel__head">PUBLIC SALE</div>
             <Col span={24}>
