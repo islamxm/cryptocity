@@ -84,6 +84,10 @@ const HomePage = () => {
                 visible={buyCryptoModal}
                 close={closeBuyCryptoModal}
                 />
+            <BuyCryptoModal
+                visible={getCryptoModal}
+                close={closeGetCryptoModal}
+                />
             <ToastContainer/>
             <PageLayout>
                 <div className="sb"></div>
