@@ -78,6 +78,8 @@ const BuyPublicModal = ({
         setCountCrypto('')
         setWallet('')
         setStartConnect(false)
+        setBuyData(null)
+        setPayData(null)
         onClose()
     }
 
@@ -94,88 +96,136 @@ const BuyPublicModal = ({
                     <h3 className="BuyModal__head_title Modal__title center">
                         покупка Public MPI
                     </h3>
-                    <div className="BuyModal__head_subtitle">
-                        Если у вас нет Metamask тогда вам необходимо ввести вручную вашего кошелька. НЕЛЬЗЯ вводить биржевые кошельки. <br/>
-                        <span>НА БИРЖЕВЫЕ КОШЕЛЬКИ ТОКЕН НЕ ПОСТУПИТ!</span>
-                    </div>
+                    {
+                        !payData ? (
+                            <div className="BuyModal__head_subtitle">
+                                Если у вас нет Metamask тогда вам необходимо ввести вручную вашего кошелька. НЕЛЬЗЯ вводить биржевые кошельки. <br/>
+                                <span>НА БИРЖЕВЫЕ КОШЕЛЬКИ ТОКЕН НЕ ПОСТУПИТ!</span>
+                            </div>
+                        ) : null
+                    }
                 </div>
                 <div className="BuyModal__body">
                     <Row gutter={[20,20]}>
                         <Col span={24}>
-                            <div className="BuyModal__body_main">
-                                <Row gutter={[35,35]}>
-                                    <Col span={12}>
-                                        <div className="BuyModal__body_main_part">
-                                            <Input
-                                                label={<>
-                                                    <div>
-                                                        Хотите купить MPI
-                                                    </div>
-                                                    <div>
-                                                        Курс MPI: <span style={{fontWeight: 700}}>{userInfo?.PublicSaleTokenPrice} USDT</span>
-                                                    </div>
-                                                </>}
-                                                type={'number'}
-                                                placeholder={''}
-                                                value={CountCrypto}
-                                                onChange={e => setCountCrypto(e.target.value)}
-                                                />
+                            {
+                                payData ? (
+                                    <div className='BuyModal__body_list'>
+                                        <div className="BuyModal__body_list_item">
+                                            <span className="BuyModal__body_list_item_name">Wallet: </span>
+                                            <span className="BuyModal__body_list_item_value">{payData?.address}</span>
                                         </div>
-                                    </Col>
-                                    <Col span={12}>
-                                        <div className="BuyModal__body_main_part">
-                                            <Input
-                                                label={<>
-                                                    <div>Нужно оплатить USDT</div>
-                                                    <div>На наш кошелек</div>
-                                                </>}
-                                                placeholder={''}
-                                                value={`${_.round(Number(CountCrypto) * Number(userInfo?.PublicSaleTokenPrice), 5)} USDT`}
-                                                disabled
-                                                />
+                                        <div className="BuyModal__body_list_item">
+                                            <span className="BuyModal__body_list_item_name">Currency: </span>
+                                            <span className="BuyModal__body_list_item_value">{payData?.currency}</span>
                                         </div>
-                                    </Col>
-                                </Row>
-                            </div>
+                                        <div className="BuyModal__body_list_item">
+                                            <span className="BuyModal__body_list_item_name">Amount: </span>
+                                            <span className="BuyModal__body_list_item_value">{CountCrypto}</span>
+                                        </div>
+                                    </div>
+                                ) : (
+                                    <div className="BuyModal__body_main">
+                                        <Row gutter={[35,35]}>
+                                            <Col span={12}>
+                                                <div className="BuyModal__body_main_part">
+                                                    <Input
+                                                        label={<>
+                                                            <div>
+                                                                Хотите купить MPI
+                                                            </div>
+                                                            <div>
+                                                                Курс MPI: <span style={{fontWeight: 700}}>{userInfo?.PublicSaleTokenPrice} USDT</span>
+                                                            </div>
+                                                        </>}
+                                                        type={'number'}
+                                                        placeholder={''}
+                                                        value={CountCrypto}
+                                                        onChange={e => setCountCrypto(e.target.value)}
+                                                        />
+                                                </div>
+                                            </Col>
+                                            <Col span={12}>
+                                                <div className="BuyModal__body_main_part">
+                                                    <Input
+                                                        label={<>
+                                                            <div>Нужно оплатить USDT</div>
+                                                            <div>На наш кошелек</div>
+                                                        </>}
+                                                        placeholder={''}
+                                                        value={`${_.round(Number(CountCrypto) * Number(userInfo?.PublicSaleTokenPrice), 5)} USDT`}
+                                                        disabled
+                                                        />
+                                                </div>
+                                            </Col>
+                                        </Row>
+                                    </div>
+                                )
+                            }
+                            
                         </Col>
-                        <Col span={24}>
-                            <div className="BuyModal__body_wallet">
-                                <div className="BuyModal__body_wallet_label">Сеть: BEP20</div>
-                                <Input
-                                    label={'Введите адрес кошелька'}
-                                    value={wallet}
-                                    onChange={e => setWallet(e.target.value)}
-                                    />
-                            </div>
-                        </Col>
+                        {
+                            !payData ? (
+                                <Col span={24}>
+                                    <div className="BuyModal__body_wallet">
+                                        <div className="BuyModal__body_wallet_label">Сеть: BEP20</div>
+                                        <Input
+                                            label={'Введите адрес кошелька'}
+                                            value={wallet}
+                                            onChange={e => setWallet(e.target.value)}
+                                            />
+                                    </div>
+                                </Col>
+                            ) : null
+                        }
+                       
                         <Col span={24}>
                             <div className='BuyModal__body_action'>
                                 <Row gutter={[15,15]}>
+                                    {
+                                        payData ? (
+                                            null
+                                        ) : (
+                                            <Col span={24}>
+                                                <div className="BuyModal__body_action_item">
+                                                    <Button
+                                                        load={status === 'initializing' || status === 'connecting'}
+                                                        onClick={() => {
+                                                            connect()
+                                                            setStartConnect(true)
+                                                        }}
+                                                        disableTextTransform={true}
+                                                        text={'Подтянуть из Metamask'}
+                                                        disabled={status === 'unavailable'}
+                                                        />
+                                                </div>
+                                                
+                                            </Col>
+                                        )
+                                    }
                                     <Col span={24}>
                                         <div className="BuyModal__body_action_item">
-                                            <Button
-                                                load={status === 'initializing' || status === 'connecting'}
-                                                onClick={() => {
-                                                    connect()
-                                                    setStartConnect(true)
-                                                }}
-                                                disableTextTransform={true}
-                                                text={'Подтянуть из Metamask'}
-                                                disabled={status === 'unavailable'}
-                                                />
-                                        </div>
-                                        
-                                    </Col>
-                                    <Col span={24}>
-                                        <div className="BuyModal__body_action_item">
-                                            <Button
-                                                onClick={buyCrypto}
-                                                variant='default-fill'
-                                                text={'Отправить запрос'}
-                                                disableTextTransform={true}
-                                                load={load}
-                                                disabled={!wallet || !CountCrypto}
-                                                />
+                                            {
+                                                payData ? (
+                                                    <Button
+                                                        onClick={closeHandle}
+                                                        // variant='danger'
+                                                        text={'Оплатил'}
+                                                        disableTextTransform={true}
+                                                        // load={load}
+                                                        />
+                                                ) : (
+                                                    <Button
+                                                        onClick={buyCrypto}
+                                                        variant='default-fill'
+                                                        text={'Отправить запрос'}
+                                                        disableTextTransform={true}
+                                                        load={load}
+                                                        disabled={!wallet || !CountCrypto}
+                                                        />
+                                                )
+                                            }
+                                            
                                         </div>
                                         
                                     </Col>

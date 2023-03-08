@@ -13,10 +13,11 @@ const HomePr = () => {
     const [infoModal, setInfoModal] = useState(false)
 
     const openBuyModal = () => {
-        if(userInfo?.TransactionsType !== '1') {
-            setInfoModal(true) 
-        } else {
+        if(userInfo?.TransactionsType == '-1' || userInfo?.TransactionsType == '1') {
             setBuyModal(true)
+        } else {
+            setInfoModal(true) 
+           
         }
     }
     const closeBuyModal = () => setBuyModal(false)
@@ -24,6 +25,7 @@ const HomePr = () => {
     return (
         <div className="HomePr panel">
             <InfoModal
+                type={userInfo?.TransactionsType}
                 visible={infoModal}
                 close={() => setInfoModal(false)}
                 />

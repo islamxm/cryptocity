@@ -2,7 +2,7 @@ import './HomeSale.scss';
 import { Row,Col } from 'antd';
 import Button from '../../../../components/Button/Button';
 import { useSelector } from 'react-redux';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import GetCryptoModal from '../../modals/GetCryptoModal/GetCryptoModal';
 import InfoModal from '../../modals/InfoModal/InfoModal';
 import BuyPublicModal from '../../modals/BuyModal/BuyPublicModal';
@@ -11,13 +11,14 @@ const HomeSale = () => {
     const [buyModal, setBuyModal] = useState(false);
     const [infoModal, setInfoModal] = useState(false)
 
-    const openBuyModal = () => {
-        if(userInfo?.TransactionType !== '0') {
-            setInfoModal(true)
-        } else {
+    const openBuyModal = useCallback(() => {
+        if(userInfo?.TransactionsType === '-1' || userInfo?.TransactionsType === '0') {
             setBuyModal(true)
+        } else {
+            setInfoModal(true)
         }
-    }
+    }, [userInfo])
+
     const closeBuyModal = () => setBuyModal(false)
 
     
@@ -25,7 +26,7 @@ const HomeSale = () => {
     return (
         <div className="HomeSale panel">
             <InfoModal
-                type={userInfo?.TransactionType}
+                type={userInfo?.TransactionsType}
                 visible={infoModal}
                 close={() => setInfoModal(false)}
                 />

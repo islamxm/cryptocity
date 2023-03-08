@@ -5,12 +5,20 @@ import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import GetCryptoModal from '../../modals/GetCryptoModal/GetCryptoModal';
 import BuyGmpiModal from '../../modals/BuyModal/BuyGmpiModal';
+import InfoModal from '../../modals/InfoModal/InfoModal';
 
 const HomeBuy = () => {
     const [buyModal, setBuyModal] = useState(false)
     const {userInfo} = useSelector(state => state);
+    const [infoModal, setInfoModal] = useState(false)
 
-    const openBuyModal = () => setBuyModal(true)
+    const openBuyModal = () => {
+        if(userInfo?.TransactionsType == '-1' || userInfo?.TransactionsType == '0' || userInfo?.TransactionsType) {
+            setBuyModal(true)
+        } else {
+            setBuyModal(false)
+        }
+    }
     const closeBuyModal = () => setBuyModal(false)
 
 
@@ -21,6 +29,11 @@ const HomeBuy = () => {
                 close={closeBuyModal}
                 type={'2'}
                 /> */}
+            <InfoModal
+                type={userInfo?.TransactionsType}
+                visible={infoModal}
+                close={() => setInfoModal(false)}
+                />
             <BuyGmpiModal
                 open={buyModal}
                 onClose={closeBuyModal}

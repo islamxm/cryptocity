@@ -38,6 +38,7 @@ const BuyGmpiModal = ({
                     setLoad(false)
                 }
             }).catch(err => {
+                console.log(err)
                 notify('Произошла ошибка', 'ERROR')
                 setLoad(false)
             })
@@ -103,7 +104,7 @@ const BuyGmpiModal = ({
                                         </div>
                                         <div className="BuyModal__body_list_item">
                                             <span className="BuyModal__body_list_item_name">Amount: </span>
-                                            <span className="BuyModal__body_list_item_value">{payData?.amount}</span>
+                                            <span className="BuyModal__body_list_item_value">{CountCrypto}</span>
                                         </div>
                                     </div>
                                 ) : (
