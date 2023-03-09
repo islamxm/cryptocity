@@ -2,11 +2,12 @@ import './BuyModal.scss';
 import {Modal, Row, Col} from 'antd';
 import { useSelector } from 'react-redux';
 import apiService from '../../../../service/apiService';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import notify from '../../../../ex/notify';
 import Input from '../../../../components/Input/Input';
 import { useMetaMask } from 'metamask-react';
 import Button from '../../../../components/Button/Button';
+import {MdContentCopy} from 'react-icons/md';
 
 const service = new apiService();
 
@@ -19,32 +20,41 @@ const BuyGmpiModal = ({
     const [payData, setPayData] = useState(null)
     const [buyData, setBuyData] = useState(null)
     const [load, setLoad] = useState(false)
-    const [CountCrypto, setCountCrypto] = useState('');
+    const [CountCrypto, setCountCrypto] = useState(0);
+    const [convertVal, setConvertVal] = useState(0);
 
 
-    const buyCrypto = () => {
+    const buyCrypto = useCallback(() => {
         setLoad(true)
-        if(token) {
-            const body = {
-                UserToken: token,
-                TransactionType: '2',
-                CountCrypto: Number(CountCrypto),
-            }
-            service.createTransaction(body).then(res => {
-                console.log(res)
-                if(res) {
-                    setBuyData(res)
-                } else {
-                    setLoad(false)
+        if(convertVal < 10) {
+            
+             notify('Минимальная сумма покупки - 10$', 'ERROR')
+             setLoad(false)
+             return;
+        } else {
+            if(token) {
+                const body = {
+                    UserToken: token,
+                    TransactionType: '2',
+                    CountCrypto: Number(CountCrypto),
                 }
-            }).catch(err => {
-                console.log(err)
-                notify('Произошла ошибка', 'ERROR')
-                setLoad(false)
-            })
+                service.createTransaction(body).then(res => {
+                    console.log(res)
+                    if(res) {
+                        setBuyData(res)
+                    } else {
+                        setLoad(false)
+                    }
+                }).catch(err => {
+                    console.log(err)
+                    notify('Произошла ошибка', 'ERROR')
+                    setLoad(false)
+                })
+            }
         }
         
-    }
+        
+    }, [convertVal])
 
     useEffect(() => {
         if(token && buyData) {
@@ -61,10 +71,24 @@ const BuyGmpiModal = ({
     }, [buyData, token])
 
     const closeHandle = () => {
-        setCountCrypto('')
+        setCountCrypto(0)
         setPayData(null);
         onClose()
     }
+
+    const copyValue = (text, label) => {
+        navigator.clipboard.writeText(text).then(res => {
+            notify(label)  
+        })
+    }
+
+    useEffect(() => {
+        if(CountCrypto && userInfo?.HardcoinTokenPrice) {
+            setConvertVal(Number(CountCrypto) * Number(userInfo?.HardcoinTokenPrice))
+        } else {
+            setConvertVal(0)
+        }
+    }, [CountCrypto, userInfo])
 
 
     return (
@@ -94,29 +118,52 @@ const BuyGmpiModal = ({
                             {
                                 payData ? (
                                     <div className='BuyModal__body_list'>
-                                        <div className="BuyModal__body_list_item">
-                                            <span className="BuyModal__body_list_item_name">Wallet: </span>
-                                            <span className="BuyModal__body_list_item_value">{payData?.address}</span>
-                                        </div>
-                                        <div className="BuyModal__body_list_item">
-                                            <span className="BuyModal__body_list_item_name">Currency: </span>
-                                            <span className="BuyModal__body_list_item_value">{payData?.currency}</span>
-                                        </div>
-                                        <div className="BuyModal__body_list_item">
-                                            <span className="BuyModal__body_list_item_name">Amount: </span>
-                                            <span className="BuyModal__body_list_item_value">{CountCrypto}</span>
+                                    <div className="BuyModal__body_list_item">
+                                        <div className="BuyModal__body_list_item_name">Wallet: </div>
+                                        <div className="BuyModal__body_list_item_value">
+                                            <span className="BuyModal__body_list_item_value_t">
+                                            {payData?.address?.slice(0, 5) + '...' + payData?.address?.slice(-5)}
+                                            </span>
+                                            <MdContentCopy 
+                                                onClick={() => copyValue(payData?.address, 'Адрес скопирован')}
+                                                className='BuyModal__body_list_item_value_c'/>
                                         </div>
                                     </div>
+                                    <div className="BuyModal__body_list_item">
+                                        <div className="BuyModal__body_list_item_name">Currency: </div>
+                                        <div className="BuyModal__body_list_item_value">
+                                            <span className="BuyModal__body_list_item_value_t">{payData?.currency}</span>
+                                        </div>
+                                    </div>
+                                    <div className="BuyModal__body_list_item">
+                                        <div className="BuyModal__body_list_item_name">Amount: </div>
+                                        <div className="BuyModal__body_list_item_value">
+                                            <span className="BuyModal__body_list_item_value_t">
+                                                {CountCrypto}
+                                            </span>
+                                            <MdContentCopy 
+                                                onClick={() => copyValue(CountCrypto, 'Количество скопировано')}
+                                                className='BuyModal__body_list_item_value_c'/>    
+                                        </div>
+                                    </div>
+                                </div>
+                                  
                                 ) : (
                                     <div className="BuyModal__body_main">
                                         <Row gutter={[35,35]}>
                                             <Col span={12}>
                                                 <div className="BuyModal__body_main_part">
-                                                    <div className="BuyModal__body_main_part_label">
-                                                        <span>Хотите купить G/MPI</span>
-                                                        <span>Курс G/MPI: {userInfo?.HardcoinTokenPrice} USDT</span>
-                                                    </div>
                                                     <Input
+                                                        label={<>
+                                                            <div>
+                                                            отите купить G/MPI
+                                                            </div>
+                                                            <div>
+                                                            Курс G/MPI: 
+                                                            <span style={{fontWeight: 700}}>{userInfo?.HardcoinTokenPrice} USDT</span> 
+                                                            </div>
+                                                        </>}
+                                                        type='number'
                                                         placeholder={''}
                                                         value={CountCrypto}
                                                         onChange={e => setCountCrypto(e.target.value)}
@@ -125,14 +172,24 @@ const BuyGmpiModal = ({
                                             </Col>
                                             <Col span={12}>
                                                 <div className="BuyModal__body_main_part">
-                                                    <div className="BuyModal__body_main_part_label">
-                                                        <span>Нужно оплатить USDT</span>
-                                                        <span>На наш кошелек</span>
-                                                    </div>
+                                                    
                                                     <Input
+                                                        label={<>
+                                                            <div>
+                                                            Нужно оплатить USDT
+                                                            </div>
+                                                            <div>
+                                                            На наш кошелек 
+                                                            </div>
+                                                        </>}
                                                         placeholder={''}
-                                                        value={`${Number(CountCrypto) * Number(userInfo?.HardcoinTokenPrice)} USDT`}
-                                                        disabled
+                                                        type={'number'}
+                                                        onChange={(e) => {
+                                                            setCountCrypto(Number(e.target.value) / Number(userInfo?.HardcoinTokenPrice))
+                                                            // setConvertVal(Number(e.target.value))
+                                                        }}
+                                                        value={convertVal}
+                                                        
                                                         />
                                                 </div>
                                             </Col>

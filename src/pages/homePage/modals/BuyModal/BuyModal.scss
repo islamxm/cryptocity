@@ -54,18 +54,24 @@
         }
 
         &_list {
-
+            width: 100%;
             &_item {
                 margin-bottom: 15px;
                 font-size: 18px;
                 line-height: 25px;
                 color: #fff;
+                overflow: hidden;
+                display: flex;
+                align-items: center;
+                width: 100%;
+
                 &:last-child {
                     margin-bottom: 0;
                 }
 
                 &_name {
                     opacity: .7;
+                    white-space: nowrap;
                 }
 
                 &_value {
@@ -73,6 +79,28 @@
                     overflow: hidden;
                     text-overflow: ellipsis;
                     white-space: nowrap;
+                    max-width: 100%;
+                    display: flex;
+                    align-items: center;
+                    margin-left: 10px;
+
+                    &_t {
+                        max-width: 100%;
+                        overflow: hidden;
+                        flex: 0 0 auto;
+                    }
+
+                    &_c {
+                        flex: 0 0 auto;
+                        display: flex;
+                        line-height: 100%;
+                        opacity: .5;
+                        transition: all .3s ease;
+                        margin-left: 10px;
+                        &:hover {
+                            opacity: 1;
+                        }
+                    }
                 }
             }
         }

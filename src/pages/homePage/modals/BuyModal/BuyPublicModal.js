@@ -8,6 +8,7 @@ import Input from '../../../../components/Input/Input';
 import { useMetaMask } from 'metamask-react';
 import Button from '../../../../components/Button/Button';
 import  * as _ from 'lodash';
+import { MdContentCopy } from 'react-icons/md';
 
 const service = new apiService();
 
@@ -23,6 +24,7 @@ const BuyPublicModal = ({
     const [CountCrypto, setCountCrypto] = useState('');
     const [wallet, setWallet] = useState('')
     const [startConnect, setStartConnect] = useState(false);
+    const [convertVal, setConvertVal] = useState(0)
 
     const {connect, account, status} = useMetaMask();
 
@@ -38,32 +40,39 @@ const BuyPublicModal = ({
 
     const buyCrypto = () => {
         setLoad(true)
-        if(token) {
-            const body = {
-                UserToken: token,
-                TransactionType: '0',
-                CountCrypto: Number(CountCrypto),
-                Wallet: wallet
-            }
-            service.createTransaction(body).then(res => {
-                console.log(res)
-                if(res) {
-                    setBuyData(res)
-                } else {
-                    setLoad(false)
+        if(Number(convertVal) < 10) {
+            notify('Минимальная сумма покупки - 10$', 'ERROR')
+            setLoad(false)
+            return;
+        } else {
+            if(token) {
+                const body = {
+                    UserToken: token,
+                    TransactionType: '0',
+                    CountCrypto: Number(CountCrypto),
+                    Wallet: wallet
                 }
-            }).catch(err => {
-                notify('Произошла ошибка', 'ERROR')
-                setLoad(false)
-            })
+                service.createTransaction(body).then(res => {
+                  
+                    if(res) {
+                        setBuyData(res)
+                    } else {
+                        setLoad(false)
+                    }
+                }).catch(err => {
+                    notify('Произошла ошибка', 'ERROR')
+                    setLoad(false)
+                })
+            }
         }
+        
         
     }
 
     useEffect(() => {
         if(token && buyData) {
             service.createPay(buyData).then(res => {
-                console.log(res)
+           
                 if(res && res?.result) {
                     setPayData(res)
                     notify('Статус транзакции - успешно', 'SUCCESS');
@@ -73,9 +82,23 @@ const BuyPublicModal = ({
             }).finally(_ => setLoad(false))
         }
     }, [buyData, token])
+    useEffect(() => {
+        if(CountCrypto && userInfo?.PublicSaleTokenPrice) {
+            setConvertVal(Number(CountCrypto) * Number(userInfo?.PublicSaleTokenPrice))
+        } else {
+            setConvertVal(0)
+        }
+    }, [CountCrypto, userInfo])
+
+    const copyValue = (text, label) => {
+        navigator.clipboard.writeText(text).then(res => {
+            notify(label)  
+        })
+    }
+
 
     const closeHandle = () => {
-        setCountCrypto('')
+        setCountCrypto(0)
         setWallet('')
         setStartConnect(false)
         setBuyData(null)
@@ -112,16 +135,32 @@ const BuyPublicModal = ({
                                 payData ? (
                                     <div className='BuyModal__body_list'>
                                         <div className="BuyModal__body_list_item">
-                                            <span className="BuyModal__body_list_item_name">Wallet: </span>
-                                            <span className="BuyModal__body_list_item_value">{payData?.address}</span>
+                                            <div className="BuyModal__body_list_item_name">Wallet: </div>
+                                            <div className="BuyModal__body_list_item_value">
+                                                <span className="BuyModal__body_list_item_value_t">
+                                                {payData?.address?.slice(0, 5) + '...' + payData?.address?.slice(-5)}
+                                                </span>
+                                                <MdContentCopy 
+                                                    onClick={() => copyValue(payData?.address, 'Адрес скопирован')}
+                                                    className='BuyModal__body_list_item_value_c'/>
+                                            </div>
                                         </div>
                                         <div className="BuyModal__body_list_item">
-                                            <span className="BuyModal__body_list_item_name">Currency: </span>
-                                            <span className="BuyModal__body_list_item_value">{payData?.currency}</span>
+                                            <div className="BuyModal__body_list_item_name">Currency: </div>
+                                            <div className="BuyModal__body_list_item_value">
+                                                <span className="BuyModal__body_list_item_value_t">{payData?.currency}</span>
+                                            </div>
                                         </div>
                                         <div className="BuyModal__body_list_item">
-                                            <span className="BuyModal__body_list_item_name">Amount: </span>
-                                            <span className="BuyModal__body_list_item_value">{CountCrypto}</span>
+                                            <div className="BuyModal__body_list_item_name">Amount: </div>
+                                            <div className="BuyModal__body_list_item_value">
+                                                <span className="BuyModal__body_list_item_value_t">
+                                                    {CountCrypto}
+                                                </span>
+                                                <MdContentCopy 
+                                                    onClick={() => copyValue(CountCrypto, 'Количество скопировано')}
+                                                    className='BuyModal__body_list_item_value_c'/>    
+                                            </div>
                                         </div>
                                     </div>
                                 ) : (
@@ -153,8 +192,12 @@ const BuyPublicModal = ({
                                                             <div>На наш кошелек</div>
                                                         </>}
                                                         placeholder={''}
-                                                        value={`${_.round(Number(CountCrypto) * Number(userInfo?.PublicSaleTokenPrice), 5)} USDT`}
-                                                        disabled
+                                                        type={'number'}
+                                                        onChange={(e) => {
+                                                            setCountCrypto(Number(e.target.value) / Number(userInfo?.PublicSaleTokenPrice))
+                                                            // setConvertVal(Number(e.target.value))
+                                                        }}
+                                                        value={convertVal}
                                                         />
                                                 </div>
                                             </Col>

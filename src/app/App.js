@@ -15,6 +15,9 @@ import { useLocation } from 'react-router-dom';
 import SignupPage from '../pages/signupPage/SignupPage';
 import { ToastContainer } from 'react-toastify';
 import ResetPage from '../pages/authPage/ResetPage';
+import AcPage from '../pages/acPage/AcPage';
+import NftPage from '../pages/nftPage/NftPage';
+import SettingsPage from '../pages/settingsPage/SettingsPage';
 
 const App = () => {
     const loc = useLocation();
@@ -39,6 +42,9 @@ const App = () => {
                     <Route path='/' element={<CheckAuth><HomePage/></CheckAuth>}/>
                     <Route path='/referals' element={<CheckAuth><RefPage/></CheckAuth>}/>
                     <Route path='/wallet' element={<CheckAuth><WalletPage/></CheckAuth>}/>
+                    <Route path='/activity' element={<CheckAuth><AcPage/></CheckAuth>}/>
+                    <Route path='/nft' element={<CheckAuth><NftPage/></CheckAuth>}/>
+                    <Route path='/settings' element={<CheckAuth><SettingsPage/></CheckAuth>}/>
                     <Route path='/signup' element={<SignupPage/>}></Route>
                     <Route path='*' element={<Notfound/>}/>
                 </Routes>

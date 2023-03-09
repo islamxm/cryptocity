@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import * as _ from 'lodash';
 import { useSelector } from 'react-redux';
 
+
 const HomeUl = ({openAllUnlock, list}) => {
     const {userInfo} = useSelector(state => state);
     const [closestDate, setClosestDate] = useState('')
@@ -29,7 +30,7 @@ const HomeUl = ({openAllUnlock, list}) => {
                     <Col span={24}>
                         <div className="HomeUl__val">
                             <div className="HomeUl__val_name">Всего в локе</div>
-                            <div className="HomeUl__val_el">{userInfo?.AllUnlocksSum} MPI</div>
+                            <div className="HomeUl__val_el">{_.round(userInfo?.AllUnlocksSum, 3)} MPI</div>
                         </div>
                     </Col>
                     <Col span={24}>
@@ -38,7 +39,7 @@ const HomeUl = ({openAllUnlock, list}) => {
                                 Ближайшая дата разлока <span>{userInfo?.MinDateUnlock}</span>
                             </div>
                             <div className="HomeUl__item">
-                                Сумма  разлока <span>{userInfo?.CurUnlockSum} MPI</span>
+                                Сумма  разлока <span>{_.round(userInfo?.CurUnlockSum, 3)} MPI</span>
                             </div>
                         </div>
                     </Col>
